@@ -1,0 +1,122 @@
+@import "../../assets/variables.scss";
+
+// remove circle menu button's down arrow
+.dropdown {
+  &-toggle::after {
+    display: none;
+  }
+}
+
+.ia-app-listing-indent {
+  margin-left: 2.5rem;
+}
+
+.ia-app-listing-grid {
+  // override bootstrap classes in grid view
+  .card {
+    width: 280px;
+    height: 200px;
+    margin: 0 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    //transition: all 0.2s ease-in-out;
+
+    &.offline {
+      background-color: #F5F5F5;
+      cursor: default;
+    }
+
+    &-body {
+      padding: .5rem .5rem 0 .5rem;
+      cursor: pointer;
+    }
+
+    &-footer {
+      border: none;
+      background-color: transparent;
+      padding: .8rem 0 0 0;
+      cursor: auto;
+    }
+
+    &:not(.offline):hover {
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .ia-app-listing-title {
+      width: calc(100% - 1.2rem);
+    }
+  }
+
+  .category {
+    min-height: 1.2rem;
+  }
+
+  .description {
+    height: 5.8rem;
+    line-height: 1.15rem;
+    margin-bottom: 0;
+    overflow: hidden;
+    // needed for multiple line ellipsis, only works on chrome
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    /* autoprefixer: off */
+    -webkit-box-orient: vertical;
+  }
+}
+
+.ia-app-listing-list {
+  .card {
+    &.offline {
+      background-color: #F5F5F5;
+      cursor: default;
+    }
+
+    &:not(.offline):hover {
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+.ia-la-appdescription-container {
+  height: 90px;
+}
+
+.ia-grid-dropdown {
+  right: 15px;
+  top: -200px;
+}
+
+.ia-list-dropdown {
+  right: 3rem;
+  padding-top: 8px;
+}
+
+.ia-grid-card {
+  height: 220px;
+}
+
+.ia-la-app-offline-modal {
+  font-size: $font-size-h5;
+}
+
+.ia-applications-view-mode {
+  line-height: 3;
+}
+
+.ia-app-listing-body {
+  height: calc(100vh - 190px);
+  padding: 0 1rem 0 2rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ia-la-applications-list{
+  width: calc(100% + 40px);
+}
+
+.ia-grid-card-container {
+  flex-wrap: wrap;
+}
+
+.pi {
+  font-size: .8rem;
+}

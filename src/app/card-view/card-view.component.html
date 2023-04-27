@@ -1,0 +1,136 @@
+<div class="ia-app-listing-body" [ngClass]="[viewSelection.view === 'grid' ? 'ia-app-listing-grid' : 'ia-app-listing-list']" >
+  <div class="d-flex flex-row justify-content-start ia-grid-card-container" *ngIf="viewSelection.view === 'grid' ; else list">
+    <div class="ia-grid-card" *ngFor="let application of applications; let i = index">
+      <div class="card my-2"
+           [ngClass]="{ 'offline': !isApplicationOnline(application) }"
+           id="ia-la-{{i}}"
+           [attr.tabindex]="isApplicationOnline(application) ? 0 : null"
+           (click)="isApplicationOnline(application)"
+           (keyup.enter)="isApplicationOnline(application)">
+        <div class="card-body" id="ia-la-select-btn-{{i}}">
+          <div id="ia-la-appname-{{i}}" class="ia-app-listing-title h4 text-truncate" title="{{application.name}}">
+            <span *ngIf="application.name" [innerHTML]="application.name">{{application.name}}</span>
+          </div>
+          <div>
+            <p id="ia-la-appcategory-{{i}}" class="h5 mb-0 card-text text-truncate category" title="{{application.category}}">{{application.category}}</p>
+            <div class="ia-la-appdescription-container">
+              <p id="ia-la-appdescription-{{i}}" class="mb-0 mt-2 card-text description text-break"
+                 [innerHTML]="application.description" title="{{ application.description }}">
+                {{application.description}}
+              </p>
+            </div>
+            <div class="card-footer d-flex flex-row justify-content-between">
+              <div tabindex="0" class="text-muted">
+                <i *ngIf="application.type === 'ACTIVE_ARCHIVING'" id="ia-la-apptype-{{i}}" class="pi pi-history"
+                   role="img" [attr.aria-label]="'ACTIVE_ARCHIVING'" title="Active Archiving"></i>
+                <i *ngIf="application.type === 'APP_DECOMM'" id="ia-la-apptype-{{i}}" class="pi pi-power-off"
+                   role="img" [attr.aria-label]="'APP_DECOMM'" title="Decommissioned Application"></i>
+              </div>
+              <div class="flex-fill"></div>
+              <div tabindex="0" *ngIf="application.cacheState === 'CACHEOUT_FAILED'" id="ia-la-cachestate-cacheout-failed-{{i}}" class="align-self-center badge pr-2">
+                      <span id="ia-la-cachestate-cacheout-failed-icon-{{i}}" class="ia-card__title-status" title="{{ 'OFFLINING_APPLICATION_FAILED' }}">
+                        <i class="icon-SVG_Error text-danger" aria-hidden="true"></i>
+                      </span>
+              </div>
+              <div tabindex="0" *ngIf="application.cacheState === 'CACHEIN_FAILED'" id="ia-la-cachestate-cachein-failed-{{i}}" class="align-self-center badge pr-2">
+                      <span id="ia-la-cachestate-cachein-failed-icon-{{i}}" class="ia-card__title-status" title="{{ 'ONLINING_APPLICATION_FAILED' }}">
+                        <i class="icon-SVG_Error text-danger" aria-hidden="true"></i>
+                      </span>
+              </div>
+              <div tabindex="0" *ngIf="application.cacheState === 'BEING_CACHED_OUT'" id="ia-la-cachestate-{{i}}" class="align-self-center badge pr-4">
+                <span id="ia-la-cachestate-label-{{i}}" class="ia-card__title-status">{{ 'OFFLINING_APPLICATION' }}</span>
+              </div>
+              <div tabindex="0" *ngIf="application.state === 'CACHED_OUT'" id="ia-la-cachestate-{{i}}" class="align-self-center badge pr-4">
+                      <span id="ia-la-cachestate-label-{{i}}" class="ia-card__title-status" title="{{ 'OFFLINE' }}">
+                        {{ 'OFFLINE' }}<i class="icon-offline h5 font-weight-bolder" aria-hidden="true"></i>
+                      </span>
+              </div>
+              <div tabindex="0" *ngIf="application.cacheState === 'BEING_CACHED_IN'" id="ia-la-cachestate-{{i}}" class="align-self-center badge pr-4">
+                <span id="ia-la-cachestate-label-{{i}}" class="ia-card__title-status">{{ 'ONLINING_APPLICATION' }}</span>
+              </div>
+              <div tabindex="0" *ngIf="application.state === 'IN_TEST'" id="ia-rp-edit-{{i}}" class="badge ia-badge-application-state">
+                <span id="ia-la-appstate-{{i}}" class="ia-card__title-status">{{ 'In Test' }}</span>
+              </div>
+              <div tabindex="0" *ngIf="application.state === 'CACHED_OUT'" id="ia-rp-edit-{{i}}" class="badge ia-badge-application-state">
+                <span id="ia-la-appstate-{{i}}" class="ia-card__title-status">{{ 'Offline' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-container>
+        <div class="float-right dropdown ia-grid-dropdown">
+          <p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
+          <button class="ia-app-listing-btn-circle" pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars" label="Show">
+            <i class="pi pi-bars" style="color: slateblue"></i>
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <ng-template #list>
+    <ul class="d-flex flex-column px-0 justify-content-start" id="ia-la-applications-list">
+      <li class="d-flex ia-la-applications-list" *ngFor="let application of applications.resources; let i = index">
+        <div class="card w-100 my-2"
+             [ngClass]="{ 'offline': !isApplicationOnline(application) }"
+             id="ia-la-{{i}}"
+             (click)="isApplicationOnline(application)"
+             (keyup.enter)="isApplicationOnline(application)">
+          <div class="card-body" id="ia-la-select-btn-{{i}}">
+            <div role="link"
+                 [attr.tabindex]="isApplicationOnline(application) ? 0 : null"
+                 class="row no-gutters d-flex align-items-center h-100">
+              <div class="col-3 d-flex">
+                <i *ngIf="application.type === 'ACTIVE_ARCHIVING'" id="ia-la-apptype-{{i}}" role="img"
+                   class="icon-activearchive text-muted align-self-center ia-app-listing-icon"
+                   [attr.aria-label]="'ACTIVE_ARCHIVING'" title="{{ 'ACTIVE_ARCHIVING'}}"></i>
+                <i *ngIf="application.type === 'APP_DECOMM'" id="ia-la-apptype-{{i}}" role="img"
+                   class="icon-decommissioned text-muted align-self-center ia-app-listing-icon"
+                   [attr.aria-label]="'APP_DECOMM'" title="{{ 'APP_DECOMM'}}"></i>
+                <div id="ia-la-appname-{{i}}" class="h5 text-truncate ia-app-listing-title ia-app-listing-indent" *ngIf="application.name"
+                     title="{{application.name}}"
+                     [innerHTML]="application.namet">{{ application.name }}
+                </div>
+              </div>
+              <div id="ia-la-appdescription-{{i}}" class="col-5 description px-2 text-truncate"
+                   [innerHTML]="application.description" title="{{ application.description }}">
+                {{ application.description }}
+              </div>
+              <div id="ia-la-appcategory-{{i}}" class="col-2 text-truncate"
+                   title="{{ application.category }}">{{ application.category }}
+              </div>
+              <div class="col-1">
+                <div *ngIf="application.cacheState === 'BEING_CACHED_OUT'" id="ia-la-cachestate-{{i}}" class="float-right align-self-center badge px-4">
+                  <span id="ia-la-cachestate-label-{{i}}" class="ia-list__title-status">{{ 'OFFLINING_APPLICATION'}}</span>
+                </div>
+                <div *ngIf="application.cacheState === 'CACHED_OUT'" id="ia-la-cachestate-{{i}}" class="float-right align-self-center badge px-4">
+                        <span id="ia-la-cachestate-label-{{i}}" class="ia-list__title-status" title="{{ 'OFFLINE'}}">
+                          <i class="icon-offline h5 font-weight-bolder" aria-hidden="true"></i>
+                        </span>
+                </div>
+                <div *ngIf="application.cacheState === 'BEING_CACHED_IN'" id="ia-la-cachestate-{{i}}" class="float-right align-self-center badge px-4">
+                  <span id="ia-la-cachestate-label-{{i}}" class="ia-list__title-status">{{ 'ONLINING_APPLICATION'}}</span>
+                </div>
+                <div *ngIf="application.cacheState === 'CACHEOUT_FAILED'" id="ia-la-cachestate-cacheout-failed-{{i}}" class="float-right align-self-center badge pr-2">
+                        <span id="ia-la-cachestate-cacheout-failed-icon-{{i}}" class="ia-list__title-status" title="{{ 'OFFLINING_APPLICATION_FAILED'}}">
+                          <i class="icon-SVG_Error text-danger" aria-hidden="true"></i>
+                        </span>
+                </div>
+                <div *ngIf="application.cacheState === 'CACHEIN_FAILED'" id="ia-la-cachestate-cachein-failed-{{i}}" class="float-right align-self-center badge pr-2">
+                        <span id="ia-la-cachestate-cachein-failed-icon-{{i}}" class="ia-list__title-status" title="{{ 'ONLINING_APPLICATION_FAILED'}}">
+                          <i class="icon-SVG_Error text-danger" aria-hidden="true"></i>
+                        </span>
+                </div>
+              </div>
+              <div class="col-1">
+                      <span *ngIf="application.state === 'IN_TEST'" class="badge ia-badge-application-state">
+                        <span id="ia-la-appstate-{{i}}" class="ia-list__title-status">{{ 'ICON_APP_IN_TEST'}}</span>
+                      </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </ng-template>
+</div>

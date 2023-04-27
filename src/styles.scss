@@ -1,1 +1,2799 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import "bootstrap/scss/bootstrap";
+@import "./assets/variables.scss";
+
+html, body {
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+input[type='checkbox'] {
+  transform: scale(1.3);
+}
+
+.btn.btn-link, a {
+  color: $ia-color-action-link;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+$ia-theme-colors: (
+  "primary":   #111B58,
+  "secondary": #0084CE
+);
+
+.p-component {
+  font-size: 14px;
+}
+
+:root {
+  --maskbg: rgba(0, 0, 0, 0.4);
+}
+
+@each $color, $value in $ia-theme-colors {
+  .btn-#{$color} {
+    @include button-variant($value, $value);
+  }
+  .btn-outline-#{$color} {
+    @include button-outline-variant($value, #fff);
+  }
+}
+
+%ia-2nd-nav-focus-color {
+  outline: 2px solid $ia-color-silver;
+}
+
+// PS Replaced the content files for the following icons to match what was shown prior to upgrade to bootsrap 9
+.pi-sort-alt:before {
+  content: "\e915" !important;
+}
+
+.pi-sort-amount-up-alt:before {
+  content: "\e914" !important;
+}
+
+.pi-sort-amount-down:before {
+  content: "\e913" !important;
+}
+
+.ia-confirm-modal {
+  .modal-dialog {
+    //max-width: 800px;
+  }
+}
+
+/* bootstrap modal override */
+.modal {
+  height: 100%;
+
+  &-header, &-footer {
+    height: 4rem;
+    background-color: #f5f5f5;
+    color: #333333;
+  }
+
+  &-header {
+    line-height: 4rem;
+    border-bottom: 1px solid #a9a9a9;
+    padding: 0 1rem;
+    margin-bottom: 0;
+
+    &:hover {
+      cursor: move;
+    }
+
+    .close {
+      margin: auto;
+    }
+  }
+
+  &-footer {
+    border-top: 1px solid #a9a9a9;
+    padding: 0.75rem;
+
+    button {
+      margin-left: .5rem;
+      margin-right: .5rem;
+    }
+  }
+
+  &-content {
+    background-color: transparent;
+    border: none;
+    &> div:first-of-type {
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  &-title {
+    line-height: 4rem;
+    font-size: 1.02rem;
+    word-break: break-word;
+  }
+}
+
+.ia-splash {
+  width: 100vw;
+  height: 100vh;
+
+  @include ia-background-gradient;
+}
+
+.p-toast.ia-toaster {
+  margin-top: $ia-primary-navbar-height + $ia-2nd-navbar-height-1st + $ia-2nd-navbar-height-2nd-3rd + 35px;
+  width: max-content;
+  max-width: 50%;
+  opacity: 1;
+}
+
+.p-toast .p-toast-message-text-content {
+  margin-left: 1rem;;
+  padding: 0 !important;
+  background-color: $ia-color-white;
+  color: $ia-color-dark-charcoal;
+  width: calc(100% - 3.5rem);
+}
+
+.p-toast .p-toast-message .p-toast-message-content {
+  min-width: 450px;
+  max-width: 480px;
+  max-height: 50vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto !important;
+  color: $ia-color-black;
+}
+
+.p-toast .p-toast-message .p-toast-icon-close {
+  height: 1.3rem;
+  width: 1.3rem;
+  top: .9rem;
+  right: 1rem !important;
+  padding: 2px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  color: $ia-color-dark-charcoal;
+  background-color: $ia-color-gray-lighter;
+  border-radius: 50%;
+  position: absolute;
+  .p-toast-icon-close-icon{
+    font-weight: 600;
+  }
+  &:hover {
+    background-color: $ia-color-gray-lighter;
+    color: #627783;
+    font-weight: normal;
+  }
+  &:focus {
+    color: #666666;
+  }
+}
+
+.p-toast {
+  .p-toast-message {
+    background-color: $ia-color-white;
+    border-bottom: 4px solid transparent;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.7);
+
+    &-info {
+      border-bottom-color: #2e3d98;
+    }
+
+    &-error {
+      border-bottom-color: #df3324;
+    }
+
+    &-warn {
+      border-bottom-color: #f05822;
+    }
+
+    &-success {
+      border-bottom-color: #006353;
+    }
+  }
+}
+
+.ia-content {
+  position: absolute;
+  width: 100%;
+  top: $ia-primary-navbar-height + $ia-2nd-navbar-height-1st + $ia-2nd-navbar-height-2nd-3rd;
+  height: calc(100vh - #{$ia-primary-navbar-height + $ia-2nd-navbar-height-1st + $ia-2nd-navbar-height-2nd-3rd});
+  padding: 0 $ia-viewport-padding-y;
+  min-width: $ia-viewport-min-width;
+  overflow-y: auto;
+
+  &-top-nav-only{
+    position: fixed;
+    top: $ia-primary-navbar-height;
+    height: calc(100vh - #{$ia-primary-navbar-height + $ia-2nd-navbar-height-1st});
+    padding-top: 25px;
+    margin-left: -25px;
+    min-width: 100%;
+    overflow-y: auto;
+  }
+}
+
+.ia-dashboard-loading{
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+}
+
+.ia-dashboard-app-total {
+  line-height: $font-size-h3;
+  font-size: $font-size-h3;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ia-dashboard-summary {
+  font-size: .875rem;
+
+  &-value {
+    font-size: 1.25rem;
+  }
+
+  &-title {
+    height: 2.5rem;
+    font-size: 1.25rem;
+    margin-bottom: 0;
+  }
+
+  &-label {
+    color: $ia-dashboard-color-link;
+    font-size: .875rem;
+  }
+
+  .card {
+    background-color: $ia-dashboard-color-card;
+    color: $ia-dashboard-color-white;
+    height: 100%;
+  }
+}
+
+%ia-dashboard-position {
+  top: $ia-primary-navbar-height;
+  height: calc(100vh - #{$ia-primary-navbar-height});
+}
+
+.ia-dashboard-content-only {
+  @extend %ia-dashboard-position;
+  &-scroll {
+    @extend %ia-dashboard-position;
+    overflow-y: scroll;
+  }
+}
+
+.ia-dashboard-storage {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.ia-dashboard-legend-row {
+  display: flex;
+  font-size: 1rem;
+  line-height: 2rem;
+  margin: .5rem;
+  min-width: 0;
+  & > div:first-of-type {
+    margin-right: .5rem;
+  }
+  &-container {
+    min-width: 0;
+  }
+}
+
+.ia-dashboard-legend-total {
+  display: flex;
+  align-items: center;
+  margin: 0  2.5rem;
+}
+
+.ia-dashboard-storage-legend {
+  display: flex;
+  margin: .5rem;
+  min-width: 0;
+}
+
+.ia-dashboard-legend {
+  &-value {
+    color: $ia-dashboard-color-black;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  &-label {
+    color: $ia-dashboard-color-black;
+    font-size: 1rem;
+    margin-right: .2rem;
+    @extend %ia-text-truncate;
+  }
+}
+
+.ia-dashboard-export-btn {
+  color: #fff;
+  background-color: #232e72;
+  border-color: #232e72;
+
+  &:hover, &:focus {
+    border-color: #2e3d98;
+    background-color: #2e3d98;
+  }
+}
+
+.ia-2nd-nav-background-1st {
+  height: $ia-2nd-navbar-height-1st;
+  z-index: $ia-2nd-navbar-height-z-index;
+
+  width: 100%;
+  position: fixed;
+  top: $ia-2nd-navbar-top;
+  left: 0;
+  background-color: $ia-2nd-navbar-background-color;
+  color: $ia-2nd-navbar-color;
+}
+
+.ia-2nd-nav-background-2nd-3rd {
+  height: $ia-2nd-navbar-height-2nd-3rd;
+  z-index: $ia-2nd-navbar-height-z-index;
+
+  width: 100%;
+  position: fixed;
+  top: $ia-2nd-navbar-top + $ia-2nd-navbar-height-1st;
+  left: 0;
+  background-color: $ia-2nd-navbar-background-color;
+  color: $ia-2nd-navbar-color;
+}
+
+.ia-nav-padding-x {
+  padding-left: $ia-navbar-padding-x;
+  padding-right: $ia-navbar-padding-x;
+}
+
+.ia-2nd-nav {
+  height: 35px;
+  margin-top: 1px;
+  white-space: nowrap;
+  border: none;
+}
+
+#ia-2nd-navbar {
+  .nav-tabs > li.active > a span {
+    font-weight: 600;
+  }
+
+  .nav-tabs .nav-link {
+    border: none;
+    border-radius: 0;
+  }
+
+  .nav-tabs .nav-link {
+    &.active {
+      border-bottom: 4px solid $ia-color-white !important;
+    }
+    &:active {
+      border-bottom: 4px solid #078db3 !important;
+    }
+    &:focus {
+      outline: 1px solid $ia-color-white;
+      border-bottom: 4px solid $ia-color-white;
+    }
+    &:hover {
+      outline: none;
+      border-bottom: 4px solid #68d7f5;
+    }
+  }
+
+  .nav-tabs > li > a.active {
+    background-color: transparent;
+    color: $ia-color-white;
+  }
+
+  .nav-tabs > li > a {
+    margin-top: 1px;
+    color: $ia-color-white;
+    padding: 7px 10px;
+    height: 33px;
+  }
+}
+
+.ia-transitional-background {
+  background-color: $ia-color-gray-lightest;
+}
+
+.ia-clear-all {
+  font-size: 1.25rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  &:focus, &:hover {
+    .icon-action_clear_all {
+      &::before {
+        color: white;
+      }
+    }
+  }
+}
+
+@mixin ia-badge-mixin {
+  color: $ia-highlight-color;
+  line-height: 1rem;
+  height: 1.3rem;
+  font-weight: 400;
+  border-radius: 0;
+  cursor: default;
+  align-self: center !important;
+}
+
+.ia-badge-application-state {
+  background-color: #df3324;
+  @include ia-badge-mixin
+}
+
+.ia-badge-search-ready {
+  background-color: #006353;
+  @include ia-badge-mixin;
+}
+
+#ia-footer-navbar.navbar {
+  min-height: 30px;
+  height: 30px;
+  z-index: 999;
+  background-color: $ia-footer-navbar-background-color;
+  border-top: 1px solid $ia-footer-navbar-border-color;
+}
+
+.p-chips .p-chips-multiple-container .p-chips-token {
+  padding: 0 0.429rem;
+  height: 1.75rem;
+}
+
+.ia-2nd-breadcrumb {
+  background-color: $ia-2nd-navbar-background-color;
+  flex-wrap: nowrap;
+  padding-left: 0;
+
+  &.breadcrumb {
+    padding: 0;
+    margin: 0;
+  }
+
+  .breadcrumb-item {
+    a {
+      color: $ia-light-color;
+      cursor: pointer;
+    }
+    &.active {
+      color: #c3e5f6;
+    }
+    & + .breadcrumb-item::before {
+      color: #02a4d8;
+    }
+  }
+}
+
+.ia-hw-data-not-tabs {
+  ul[ngbNav].nav-tabs, ul[ngbnav].nav {
+    .nav-item {
+      background-color: transparent !important;
+      margin-bottom: 0 !important;
+
+      .nav-link {
+        color: $ia-color-dark-charcoal !important;
+        border: none !important;
+        border-bottom: 5px solid transparent !important;
+        margin-right: 0 !important;
+
+        &.disabled {
+          pointer-events: auto !important;
+          cursor: not-allowed !important;
+          opacity: .4 !important;
+        }
+
+        &.active {
+          background-color: transparent !important;
+          font-weight: bold !important;
+          border: none !important;
+
+          &:hover {
+            border: none !important;
+          }
+        }
+
+        &:hover {
+          border-bottom-color: #0084ce !important;
+        }
+      }
+    }
+  }
+}
+
+
+
+.ia-3rd-nav, ul[ngbNav].nav-tabs, ul[ngbnav].nav {
+  .nav-item {
+    background-color: $ia-color-white;
+    margin-bottom: 0;
+
+    .nav-link {
+      color: $ia-color-dark-charcoal;
+      border: none;
+      border-bottom: 5px solid transparent;
+      margin-right: 0;
+
+      &.disabled {
+        pointer-events: auto;
+        cursor: not-allowed;
+        opacity: .4;
+      }
+
+      &.active {
+        //font-weight: 600;
+        border-bottom-color: #232e72;
+        &:hover {
+          border-bottom-color: #232e72;
+        }
+      }
+
+      &:focus {
+        //font-weight: 600;
+        border-bottom-color: #232e72;
+        outline: 1px solid #2e3d98;
+        outline-offset: -1px;
+      }
+
+      &:hover {
+        border-bottom-color: #0084ce;
+      }
+    }
+  }
+}
+
+
+
+/*
+ * PrimeNg Overrides
+ */
+
+// style PrimeNg typeahead to mimic bootstrap input
+.p-autocomplete {
+  &-panel {
+    background-color: $ia-color-white;
+    width: 100%;
+
+    ia-highlight-marker {
+      background-color: transparent;
+      font-weight: 700;
+    }
+    li div {
+      @extend %ia-text-truncate;
+    }
+  }
+
+  .p-autocomplete-input {
+    padding-left: 1rem;
+  }
+
+  .p-button:enabled:hover {
+    background-color: transparent;
+    color: $ia-color-black;
+  }
+
+  .p-autocomplete-dropdown {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    right: -.1rem;
+    color: $ia-color-black;
+    border: none;
+    .p-button-icon {
+      font-size: 10px;
+      font-weight: bold;
+    }
+  }
+
+  &.p-autocomplete-dd {
+    .p-autocomplete-input {
+      width: 100%;
+    }
+  }
+
+  .p-autocomplete-dropdown {
+    height: 100%;
+    width: 2em;
+    margin-right: 0;
+    vertical-align: top;
+  }
+}
+
+.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight,
+.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item:hover {
+  color: white;
+  background-color: #007ad9;
+}
+
+.p-autocomplete.p-autocomplete-multiple .p-autocomplete-multiple-container {
+  padding: 0.2145em 0.429em;
+}
+
+.p-autocomplete-token-label {
+  display: block;
+  margin-right: 2em;
+}
+
+.p-autocomplete-dd .p-autocomplete-input, .p-autocomplete-dd .p-autocomplete-multiple-container {
+  border-radius: 3px !important;;
+}
+
+// PrimeNg Table Overrids
+// override ui table header to no wrap
+.p-datatable-thead {
+  white-space: nowrap;
+}
+
+.p-datatable-thead {
+  background-color: #f1f1f1;
+}
+
+.ia-select-table {
+  height: 28rem;
+}
+
+// this allow a focus border to be drawn on each row (tr) for non chromium Edge only
+@supports (-ms-ime-align: auto) {
+  .p-datatable-scrollable-body {
+    padding: 1px;
+  }
+}
+
+.p-datatable .table {
+  th:hover {
+    background-color: $ia-table-highlight-background-color;
+    .p-column-resizer {
+      border-right: 1px dotted black;
+    }
+  }
+
+  table-layout: fixed;
+}
+
+// PrimeNG p-table actually uses two tables - first for the header template and second for the body template.
+// Therefore we have to deal with first table in special way.
+.p-datatable {
+  .table:first-child {
+    margin-bottom: 0;
+    th {
+      border-top: 0 solid transparent;
+      height: $ia-table-cell-height;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      @extend %ia-text-truncate;
+    }
+  }
+
+  .p-column-resizer-helper {
+    background-color: $ia-dark-background-color-active-border-color;
+  }
+
+  .p-datatable .p-datatable-thead > tr > th {
+    line-height: 2rem;
+  }
+
+  .p-datatable-tbody > tr > td {
+    vertical-align: middle;
+  }
+
+  .p-datatable-tfoot > tr > td, .p-datatable-tbody > tr > td, .p-datatable-thead > tr > th {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0 .5rem;
+    height: 2.5rem;
+  }
+
+  .p-datatable-tbody > tr > td.ia-search-result-action-col, .p-datatable-thead > tr > th.ia-search-result-action-col {
+    width: 2.5rem;
+    text-overflow: clip;
+  }
+
+  .p-datatable-tbody > tr > td.ia-expand-collapse-col {
+    border: none;
+  }
+  .p-datatable-tbody > tr:first-child > td.ia-expand-collapse-col {
+    border-bottom: 1px solid #dee2e6;
+  }
+  .p-datatable-tbody > tr > td.ia-expand-collapse-col {
+    border-top: none;
+  }
+}
+
+.ia-table-header-sortable {
+  @extend %ia-text-truncate;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: calc(100% - 16px);  // icon width is 14px
+  font-weight: 700;
+}
+
+.p-datatable-resizable .p-datatable-thead > tr > th {
+  @extend %ia-text-truncate;
+  &.p-sortable-column.p-resizable-column {
+    text-overflow: clip;
+  }
+}
+
+// TODO: fixed in primeng, remove after upgrade
+// https://github.com/primefaces/primeng/issues/5825
+.ia-table-row-no-hover+tr:hover {
+  background: transparent !important;
+}
+
+.icon-SVG-Remove-X {
+  font-size: .6rem;
+}
+
+.icon-IA-Icons-true {
+  color: map-get($theme-colors, success);
+}
+
+.icon-SVG_ContextMenuMain {
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.ia-table-heading {
+  @extend %ia-text-truncate;
+  @extend %ia-table-heading-attr;
+  font-size: $h4-font-size;
+  margin-bottom: 0;
+}
+
+.ia-table-heading-toolbar {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #dddddd;
+  @extend %ia-table-heading-attr;
+}
+
+.ia-table-inner-border {
+  border: 1px solid $brand-lighter
+}
+
+.form-control-plaintext {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+td .form-control-plaintext {
+  white-space: normal;
+}
+
+ia-highlight-marker {
+  background: $ia-text-highlight-color;
+}
+
+// filters
+.ia-la-filter-row {
+  display: flex;
+  margin-left: 0;
+  width: calc(100vw - 100px);
+
+  .ia-la-search-input {
+    min-width: 150px;
+    max-width: 200px;
+    flex: 1;
+    position: relative;
+  }
+
+  .form-group {
+    &:first-child{
+      padding-left: 0;
+    }
+    flex: 1;
+    //max-width: 20rem;
+    margin-bottom: 0;
+  }
+}
+
+.ia-filter-select {
+  //position: absolute;
+  min-width: 7.5rem;
+  max-width: 15rem;
+  margin-top: 5px;
+  height: 25px;
+  text-overflow: ellipsis;
+  padding: 0;
+  border: 1px solid $ia-color-gray-darker;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  color: $ia-color-white;
+  option, optgroup {
+    color: $ia-color-dark-charcoal;
+    background-color: $ia-color-white;
+  }
+
+  &:focus {
+    box-shadow: none;
+    @extend %ia-2nd-nav-focus-color;
+    //overflow: hidden;
+  }
+
+  &:after {
+    color: $ia-color-white;
+  }
+
+  &:disabled {
+    color: #666666;
+    background-color: $ia-color-white;
+    border-color: #666666;
+  }
+}
+
+// Filter in Edge needs to have white drop down arrow
+.ia-filter-select {
+  padding: 0 1rem 0 .5rem;
+  -webkit-appearance: none;
+  background: transparent url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>")
+  no-repeat right center;
+}
+
+.ia-filter-label {
+  margin-left: 1rem;
+  margin-right: .5rem;
+  text-align: right;
+  line-height: $ia-secondary-nav-section-height;
+  color: $ia-color-gray;
+  @extend %ia-text-truncate;
+}
+
+.ia-search-filter-container {
+  height: 3rem;
+  .p-inputswitch-slider{
+    font-family: icomoon, sans-serif;
+    color: #2c95dd;
+
+    &:before {
+      content: "\f0b0";
+      padding-left: .2rem;
+    }
+  }
+  .custom-control-label {
+    &:after {
+      content: "\f0b0";
+      padding: .175rem 0 0 .175rem;
+    }
+  }
+}
+
+.ia-search-canvas-empty-margin {
+  margin-top: 100px;
+}
+
+.ia-global-tips-text-color{
+  color: #999999;
+}
+
+.ia-text-inactive {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
+  color: $ia-color-gray-dark;
+}
+
+.ia-text-gray-lighter {
+  color: $ia-color-gray-lighter;
+}
+
+.ia-text-gray-darker {
+  color: $ia-color-gray-darker;
+}
+
+.ia-text-gray-darkest {
+  color: $ia-color-gray-darkest;
+}
+
+.ia-text-dark-charcoal {
+  color: $ia-color-dark-charcoal;
+}
+
+.ia-text-muted{
+  color: $ia-text-muted;
+}
+
+.ia-el-clickable {
+  cursor: pointer !important;
+}
+
+.ia-el-movable {
+  cursor: move !important;
+}
+
+// TODO: refactor to mixins or placeholders
+.ia-compliance-details-overflow {
+  @extend %ia-text-truncate;
+}
+
+.apptable-detailpanel {
+  th {
+    white-space: nowrap;
+  }
+  &.panel-body {
+    background-color: $ia-color-white;
+  }
+}
+
+.ia-block-cr-pointer {
+  display:block;
+  cursor: pointer;
+}
+
+.apptable-filter-log-level {
+  width: 120px;
+  display: inline-block;
+}
+
+.ia-execution-log-checkbox-disabled {
+  opacity: 0;
+}
+
+.ia-el-job-execution-log-info {
+  background-color:#7BBDB3;
+}
+
+.ia-el-job-execution-log-warn {
+  background-color:#E5A250;
+}
+
+.ia-el-job-execution-log-debug {
+  background-color:#858585;
+}
+
+.ia-el-job-execution-log-error {
+  background-color:#E77465;
+}
+
+.ia-el-job-execution-log-debug-text,
+.ia-el-job-execution-log-info-text,
+.ia-el-job-execution-log-warn-text,
+.ia-el-job-execution-log-error-text {
+  position: relative;
+  display: inline;
+}
+
+// TODO: refactor negative values
+.ia-el-job-execution-log-debug-text {
+  right: -10px;
+}
+
+.ia-el-job-execution-log-info-text {
+  right: -23px;
+}
+
+.ia-el-job-execution-log-warn-text {
+  right: -16px;
+}
+
+.ia-el-job-execution-log-error-text {
+  right: -11px;
+}
+
+.ia-el-job-edit-properties-list-row {
+  border-bottom: solid 1px #d7d7d7;
+  padding-top: 5px;
+  padding-bottom: 30px;
+  padding-left: 100px;
+}
+
+.ia-batchitem-log-body {
+  margin-bottom: $footer-height;
+}
+
+// TODO: maybe tie to ia-content height
+.ia-content-section-height {
+  height: calc(100vh - #{$ia-fixed-sections-height} - 40px);
+}
+
+.ia-search-form-extended-search-label {
+  color: $ia-color-gray;
+  padding-right: 0;
+}
+
+.ia-wait-modal {
+  display: flex;
+  text-align: center;
+  width: 380px;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+  min-height: calc(100vh - 60px);
+}
+
+
+// begin - bootstrap overrides
+.form-horizontal .control-label {
+  text-align: right;
+}
+.form-group.required .control-label:after, .form-group.required em[required]:after, .form-group.required label:after {
+  content: "\0000a0*";
+  color: #a94442;
+  font-weight: bold;
+  padding-left: .2rem;
+}
+// TODO: remove and use above class, we do not have to add class to markup, the Required attribute will take care of it
+label.ia-required:after {
+  content: "*";
+  font-weight: bold;
+  color: #cc3232;
+  padding-left: 3px;
+}
+
+.progress {
+  box-shadow: none;
+  height: 15px;
+  border-radius: 10px;
+}
+
+// wizard modal style
+.ia-wizard-modal-dialog {
+  &> .modal-dialog {
+    min-width: $ia-wizard-modal-dialog-width;
+  }
+
+  .modal-body {
+    height: $ia-wizard-modal-dialog-height;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: $ia-color-white;
+    overflow-y: auto;
+  }
+
+  .tab-content {
+    height: $ia-wizard-modal-tab-content-height;
+    overflow-y: auto;
+  }
+}
+
+.ia-holding-wizard-node-field, .ia-holding-wizard-node-field[readonly] {
+  @extend %ia-text-truncate;
+  padding-right: 80px;
+  background-color: #fff;
+}
+
+.ia-holding-wizard-node-field[disabled] {
+  background-color: #eee;
+}
+
+.ia-holding-wizard-select-node, .ia-holding-wizard-clear-node {
+  position: absolute;
+  top: 0;
+}
+
+.ia-holding-wizard-select-node {
+  right: 15px;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.ia-holding-wizard-clear-node {
+  right: 55px;
+}
+
+#new-svg-schema rect[tabindex='0']:focus {
+  outline: map-get($theme-colors, primary) solid 3px;
+}
+
+// TODO: remove unused class
+tr.ia-row-background-active td {
+  background-color: $table-active-bg;
+}
+
+.p-highlight td {
+  background-color: $table-active-bg !important;
+}
+
+// Row Listing Styles shared by Search and Application Listing
+%ia-app-listing-body-cursor {
+  cursor: pointer;
+}
+
+.ia-app-listing-btn-circle {
+  float: right;
+  width: 30px;
+  height: 30px;
+  padding: 5px 0;
+  border-radius: 15px;
+  text-decoration: none;
+  border: none;
+
+  &:hover, &:focus {
+    background-color: $ia-color-gray-lighter;
+  }
+}
+
+.ia-app-listing {
+  &-title {
+    font-weight: 600;
+    margin-bottom: 0;
+    padding: 5px 0;
+  }
+
+  &-icon {
+    padding-left: 13px;
+    position: absolute;
+  }
+}
+
+.ia-app-listing-list {
+  // override bootstrap classes
+  .card {
+    height: $ia-listing-card-body-height;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+
+    &-body {
+      padding: 0;
+      @extend %ia-app-listing-body-cursor;
+    }
+  }
+
+  // listing description
+  .description {
+    text-align: left;
+    @extend %ia-text-truncate;
+  }
+
+  .ia-app-listing-btn-circle {
+    margin: 5px;
+  }
+}
+
+// remove circle menu button's down arrow
+.dropdown {
+  &-item {
+    cursor: pointer;
+  }
+}
+
+.ia-modal-lg .modal-lg {
+  width: 600px;
+}
+
+.ia-modal-xl {
+  .modal-dialog {
+    max-width: 90%;
+  }
+
+  .modal-body {
+    height: $ia-wizard-modal-dialog-height;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: $ia-color-white;
+    overflow-y: auto
+  }
+}
+
+.ia-modal-container {
+  .modal-header, .modal-footer {
+    background-color: $ia-color-white;
+    border: none;
+  }
+  box-shadow: 0 0 5px 0 rgba(0,0,0,.7);
+  border-bottom: 4px solid transparent;
+}
+
+.ia-modal-window {
+  .modal-header, .modal-footer {
+    background-color: #f5f5f5 !important;
+  }
+  .modal-footer {
+    border-top: 1px solid #a9a9a9;
+  }
+  border: none;
+}
+
+.ia-modal-body {
+  min-height: 6rem;
+  padding: .5rem 1rem 1.5rem;
+  background-color: $ia-color-white;
+  overflow-y: auto;
+  margin-bottom: 0;
+}
+
+.ia-drop-target-after {
+  border-right: 1px solid #80bfeb;
+}
+
+.ia-drop-target-before {
+  border-left: 1px solid #80bfeb;
+}
+
+.ia-drop-target-before:before {
+  position: absolute;
+  content: '';
+  border: 5px solid transparent;
+  border-left-color: #80bfeb;
+  display: inline-block;
+  z-index: 10;
+  left: -5px;
+  top: -6px;
+}
+
+.ia-drop-target-after:after {
+  position: absolute;
+  content: '';
+  border: 5px solid transparent;
+  border-right-color: #80bfeb;
+  display: inline-block;
+  z-index: 10;
+  right: -5px;
+  top: -6px;
+}
+
+.ia-drop-target-empty-container .ia-search-design-container:after {
+  float: left;
+  content: " ";
+  height: 74px;
+  margin-top: 3px;
+  background: white;
+  width: 33%;
+  border: 1px dashed #c2c2c2;
+}
+
+.col-form-label {
+  color: $ia-color-dove-gray;
+  font-weight: 600;
+}
+
+.ia-edit-form-field-modal-body .nav-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background-color: white;
+  border-bottom: none;
+  padding-left: 0.1rem;
+  padding-top: 0.1rem;
+}
+
+.ia-filter-container {
+  .p-dropdown .p-dropdown-panel {
+    width: max-content;
+  }
+
+  button, a {
+    [class*=" icon-SVG_Calendar"] {
+      color: $ia-color-action-button-foreground;
+    }
+  }
+}
+
+.ia-search-input-container {
+  display: flex;
+  line-height: 1.5rem;
+  * {
+    border-radius: 0 !important;
+  }
+
+  .p-dropdown:not(.p-disabled) {
+    &:hover {
+      border: 1px solid #959595;
+    }
+    &.p-focus {
+      @extend %ia-2nd-nav-focus-color;
+      outline-offset: -2px;
+    }
+  }
+
+  label {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .ia-find-box {
+    min-width: 100px;
+  }
+
+}
+
+.ia-search-input-filter-container .p-dropdown {
+  .p-dropdown-trigger {
+    background-color: transparent;
+    color: $ia-color-white;
+    width: 1.2rem;
+    font-size: .8rem;
+    padding-top: .1rem;
+  }
+  .p-dropdown-label{
+    color: $ia-color-white;
+    font-size: 1rem;
+    padding: 0
+  }
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+    padding: .25rem .75rem;
+  }
+}
+
+// overlay panel are transparent, might be z-index issue but set to white for now
+.p-overlaypanel {
+  background-color: $ia-color-white;
+
+  .p-dropdown-panel {
+    background-color: #fff;
+  }
+}
+
+.ia-filter-status-container {
+  display: flex;
+
+  .ia-filter-select{
+    border-radius: 0; // mimic bootstrap
+  }
+
+  .p-multiselect {
+    .p-multiselect-label {
+      display: inline;
+    }
+
+    .p-multiselect-label-container span {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: calc(100% - 16px);
+    }
+
+    &.p-focus {
+      @extend %ia-2nd-nav-focus-color;
+      outline-offset: -2px;
+    }
+  }
+
+  .p-multiselect-panel .p-multiselect-item span:nth-child(2) {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+}
+
+.p-dropdown-trigger-icon.p-clickable.pi.pi-caret-down {
+  transform: scale(.7, .8);
+  padding-left: .5rem;
+  &:before {
+    content: '\e906';
+  }
+}
+
+.p-multiselect-trigger-icon.pi.pi-chevron-down {
+  transform: scale(.7, .8);
+}
+
+.ia-background-request-container {
+  .filter-label {
+    margin-bottom: 0;
+    padding: 0;
+  }
+}
+
+.ia-loading-indicator-container {
+  position: absolute;
+  width: calc(100% - 30px);
+  text-align: center;
+  z-index: 100;
+  opacity: .25;
+  background-color: transparent;
+}
+
+.p-datatable-loading-overlay {
+  background-color: transparent;
+}
+
+.ia-loading-sub-panel {
+  position: absolute;
+  width: 100%;
+  margin: -50px;
+}
+
+.ia-background-status {
+  min-width: 10rem;
+}
+
+body .p-multiselect .p-multiselect-label {
+  padding: 0;
+}
+
+.p-multiselect-trigger-icon.p-clickable.pi.pi-chevron-down {
+  transform: scale(.7, .9);
+  &:before {
+    content: '\e906';
+  }
+}
+
+// Over-ride PrimeNg tristate checkbox
+p-checkbox {
+  vertical-align: middle !important;
+}
+
+div.p-checkbox {
+  vertical-align: middle;
+  .p-checkbox-box:not(.p-highlight) span:before {
+    content: none;
+  }
+
+  .p-checkbox-icon.pi.pi-times {
+    transition-duration: 0ms;
+    visibility: hidden;
+  }
+}
+
+.p-checkbox-label {
+  margin: 0 0 0 0.5em;
+}
+
+// specific styles for tristate checkbox in secondary nav
+.ia-2nd-nav-background-2nd-3rd {
+  .p-multiselect {
+    background: transparent;
+    border: 1px solid #a6a6a6;
+    transition-property: none;
+  }
+  .p-multiselect:not(.p-disabled):hover {
+    border-color: #959595;
+  }
+  .p-multiselect:not(.p-disabled).p-focus {
+    @extend %ia-2nd-nav-focus-color;
+    outline-offset: -2px;
+  }
+  .p-multiselect .p-multiselect-label {
+    position: absolute;
+    padding-left: .25rem;
+    line-height: 1.5rem;
+    color: $ia-color-white;
+    @extend %ia-text-truncate;
+    width: calc(100% - .8rem);
+  }
+  .p-multiselect .p-multiselect-trigger {
+    background-color: transparent;
+    width: 1rem;
+    line-height: 2em;
+    text-align: center;
+    padding: 0;
+    color: $ia-color-white;
+    border: none;
+  }
+
+  .p-checkbox {
+    .p-checkbox-box {
+      border-color: #959595;
+      background-color: transparent !important;
+      border-radius: 0;
+      &:not(.p-disabled):hover {
+        color: $ia-color-white;
+        border-color: $ia-color-silver;
+        box-shadow: none;
+      }
+      &.p-focus {
+        color: $ia-color-white;
+        @extend %ia-2nd-nav-focus-color;
+        outline-offset: -1px;
+        box-shadow: none;
+      }
+      .p-checkbox-icon.pi.pi-check {
+        background-color: #007ad9;
+      }
+    }
+  }
+}
+
+.ia-2nd-nav-background-2nd-3rd .ia-filter-select.p-multiselect .p-multiselect-items-wrapper {
+  max-height: inherit !important;
+}
+// end over-ride
+
+.ia-edit-form-field-xquery .CodeMirror {
+  height: 150px;
+  border: 1px solid $ia-color-silver;
+  font-size: 14px;
+}
+
+#ia-search-comp-xformeditor-ta .CodeMirror {
+  height: calc(100vh - 400px);
+  font-size: 14px;
+}
+
+#ia-search-comp-qeditor-ta .CodeMirror {
+  height: calc(100vh - 360px);
+  font-size: 14px;
+}
+
+#ia-application-rule-ta .CodeMirror {
+  height: calc(100vh - 278px);
+  font-size: 12px;
+}
+
+// style for xterm.js
+#terminal.terminal-outer {
+  height: 100%;
+}
+
+.ia-icon-table-row, .ia-icon-contant-unavailable {
+  color: $ia-result-list-icon;
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+.ia-icon-contant-unavailable {
+  color: $unavailable-content;
+}
+
+.ia-icon-table-row, .ia-icon-offline-store {
+  color: $ia-result-list-icon;
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+.ia-viewer-preview-popover {
+  background-color: black;
+  display: block;
+  max-width: 450px;
+  max-height: 550px;
+  width: auto;
+  height: auto;
+}
+
+i.p-sortable-column-icon.pi.pi-fw.pi-sort-alt {
+  color: $ia-color-silver !important;
+  width: auto;
+  padding-left: 1px;
+}
+
+i.p-sortable-column-icon.pi.pi-fw {
+  max-width: 16px;
+}
+
+// For pie chart slices
+.no-focus-feedback:focus {
+  outline: none;
+}
+
+// PRIMENG AUTOCOMPLETE START
+//mimic bootstrap focus
+body .p-autocomplete.p-autocomplete-multiple .p-autocomplete-multiple-container:not(.p-disabled).p-focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #9accef;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(44, 149, 221, 0.25);
+}
+.p-button-icon-only .p-button-icon-left.pi.pi-caret-down {
+  transform: scale(.8, 1.2);
+  padding-left: .25rem;
+}
+body .p-button.p-button-icon-only {
+  overflow: hidden;
+}
+
+.p-autocomplete .p-inputtext {
+  font-family: $font-family-sans-serif;
+  margin: 0;
+  outline: 0;
+  padding: 0 .75rem;
+  font-weight: 400;
+}
+//body .p-autocomplete .p-autocomplete-input {
+//  padding: 0 .75rem;
+//}
+.p-autocomplete-dd input, .p-autocomplete-dd .p-autocomplete-multiple-container {
+  border-radius: 3px;
+}
+.p-autocomplete-input-token input[placeholder] {
+  padding: 0 .75rem;
+  width: auto;
+}
+.ia-search-multi-category .p-inputtext {
+  border: 1px solid #ced4da;
+  width: 100%;
+  padding-left: .25rem !important;
+}
+span.p-autocomplete {
+  display: block;
+}
+.ia-search-multi-category .p-inputtext:enabled:hover:not(.p-error):not(.is-invalid) {
+  border-color: #212121;
+}
+.ia-search-multi-category .p-inputtext:enabled:focus:not(.p-error):not(.is-invalid) {
+  border-color: #007ad9;
+  outline: 0 none;
+  box-shadow: none;
+}
+.ia-search-multi-category .p-inputtext.is-invalid:enabled:focus {
+  outline: 0 none;
+  box-shadow: none;
+}
+.ia-search-multi-category .form-control.is-invalid {
+  background-image: none;
+}
+.ia-search-multi-category .p-autocomplete.p-autocomplete-multiple .p-autocomplete-multiple-container .p-autocomplete-token {
+  font-size: 14px;
+  padding: 4px 4px 4px 4px !important;
+  margin: 0 0.286em 0 0;
+  background: #007ad9;
+  color: #ffffff;
+}
+.p-autocomplete-token {
+  cursor: default;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+  padding: .125em .5em;
+  white-space: nowrap;
+  position: relative;
+  margin-right: .125em;
+  border: 0;
+  font-size: .9em;
+}
+
+body .p-component {
+  font-family: $font-family-sans-serif;
+  font-size: .8rem;
+  text-decoration: none;
+}
+// PRIMENG AUTOCOMPLETE END
+
+
+body .p-colorpicker-preview {
+  width: 2rem;
+  border: 0;
+  border-radius: 3px 0 0 3px;
+  height: 2.05rem;
+}
+
+// focus and hover overrides
+.btn-link:focus, .btn-link.focus {
+  border-color: #9accef;
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem rgba(44, 149, 221, 0.25);
+  text-decoration: none;
+}
+
+.btn.ia-expand-collapse:focus {
+  box-shadow: none;
+}
+
+.btn-outline-secondary:hover {
+  color: #495057;
+  background-color: #fff;
+  border-color: #9accef;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(44, 149, 221, 0.25);
+}
+
+.ia-font-size-h7 {
+  font-size: $font-size-h7
+}
+
+.ia-font-size-small {
+  font-size: $font-size-small
+}
+
+// toggle switch overrides for bootstrap
+.custom-switch {
+  padding-left: 2.25rem;
+
+  .custom-control-label {
+    &::before {
+      left: -2.25rem;
+      height: 1.25rem;
+      width: 2.5rem; // it was 1.75rem before. Sliding way is longer than before.
+      background-color: #adb5bd;
+      pointer-events: all;
+      border-radius: 1rem;
+      cursor: pointer;
+    }
+
+    &::after {
+      width: 1rem; // it was calc(1rem - 4px) before. Oval is bigger than before.
+      height: 1rem; // it was calc(1rem - 4px) before. Oval is bigger than before.
+      background-color: $ia-color-white;
+      border-radius: 2rem; //   it was 0.5rem before. Oval is bigger than before.
+      cursor: pointer;
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::after {
+    transform: translateX(1.25rem);
+  }
+}
+
+li.p-disabled.p-multiselect-item > div.p-checkbox {
+  display: none !important;
+}
+
+/* override PrimeNg table style  */
+.table {
+  color: #333333;
+}
+
+.table-active, .table-active > th, .table-active > td {
+  background-color: #dde4e8;
+}
+
+.p-datatable .p-datatable-tbody > tr:active {
+  background-color: #98a8b2;
+}
+
+.table-hover tbody tr:hover {
+  background-color: $ia-color-action-button;
+}
+
+.p-datatable .p-datatable-tbody > tr:focus {
+  outline: 1px solid #2e3d98;
+  outline-offset: -1px;
+  z-index: 10;
+
+  &.ia-expand-collapse-row {
+    //outline-offset: 1px;
+  }
+}
+
+.modal-body {
+  .ia-pagination-container {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
+}
+
+.ia-pagination-container {
+  padding-top: .5rem;
+  background-color: #e7e7e7;
+  .input-group-text {
+    color: $ia-color-dark-charcoal;
+    padding-top: .5rem;
+  }
+
+  .btn.btn-link, .form-control {
+    color: $ia-color-dark-charcoal;
+    &:focus {
+      border-color: $ia-dark-background-color-active;
+      box-shadow: none;
+    }
+    &.disabled {
+      color: $ia-color-silver;
+      opacity: .65;
+    }
+  }
+}
+
+.as-split-gutter {
+  border-right: 1px solid $ia-color-gray-dark;
+}
+
+.p-datatable .p-datatable-tbody > tr.p-highlight, .p-datatable .p-datatable-tbody >
+tr.ia-search-result-row.ia-state-highlight.ia-state-highlight {
+  background-color: #cbd3d9;
+  color: $ia-color-dark-charcoal;
+}
+
+.p-datatable .p-datatable-tbody > tr.ia-search-result-row.p-highlight {
+  background-color: transparent;
+}
+
+.p-datatable .p-checkbox .p-checkbox-box, .ia-search-result-toolbar .p-checkbox .p-checkbox-box {
+  border-color: #757575;
+  box-shadow: none !important;
+  &.p-highlight {
+    border-color: #666666;
+    background-color: #666666;
+
+    &:not(.p-disabled):hover {
+      border-color: #666666;
+      background-color: #666666;
+    }
+  }
+}
+.p-datatable .table th:hover {
+  background-color: transparent;
+}
+.p-datatable .p-checkbox .p-checkbox-box:not(.p-disabled):hover {
+  border-color: #212121;
+}
+.p-datatable .p-checkbox .p-checkbox-box.p-focus, .ia-search-result-toolbar .p-checkbox .p-checkbox-box.p-focus {
+  border: 2px solid #2e3d98;
+  color: #ffffff;
+  outline: none;
+  box-shadow: none;
+}
+.p-datatable .p-checkbox .p-checkbox-box.p-highlight, .ia-search-result-toolbar .p-checkbox .p-checkbox-box.p-highlight {
+  border-color: #757575;
+  background-color: #666666;
+  color: #ffffff;
+}
+.p-datatable .p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled):hover {
+  border-color: #757575;
+  background-color: #666666;
+  color: #ffffff;
+}
+.p-datatable .p-checkbox .p-checkbox-box.p-highlight.p-focus,
+.ia-search-result-toolbar .p-checkbox .p-checkbox-box.p-highlight.p-focus{
+  border-color: #757575;
+  background-color: #666666;
+  color: #ffffff;
+}
+.p-datatable .p-checkbox .p-checkbox-box .p-checkbox-icon {
+  overflow: hidden;
+  position: relative;
+  font-size: 14px;
+}
+
+.dropdown-item {
+  color: $ia-color-dark-charcoal;
+  &:hover {
+    background-color: $ia-color-action-button;
+  }
+  &:focus {
+    background-color: transparent;
+    outline: 1px solid #2e3d98;
+    outline-offset: -1px;
+  }
+  &.active, &:active {
+    color: $ia-color-dark-charcoal;
+    background-color: transparent;
+  }
+}
+
+.p-datatable {
+  .btn-link, a {
+    color: $ia-color-action-link;
+    &:hover, a:hover, &:hover {
+      color: $ia-color-action-link;
+      background-color: $ia-color-action-button;
+      .icon-SVG_ContextMenuMain {
+        color: $ia-color-action-link;
+      }
+    }
+    &:active{
+      color: $ia-color-action-link;
+      background-color: #98a8b2;
+    }
+  }
+}
+
+.ia-content, .modal-dialog {
+  button, a {
+    [class^="icon-"], [class*=" icon-"] {
+      color: $ia-color-action-button-foreground;
+    }
+  }
+
+  .ia-2nd-nav-background-2nd-3rd {
+    button, a {
+      [class^="icon-"], [class*=" icon-"] {
+        color: inherit;
+      }
+      [class*=" icon-SVG_Calendar"] {
+        color: $ia-color-action-button-foreground;
+      }
+    }
+  }
+}
+
+.modal-dialog {
+  margin-bottom: 0;
+}
+
+.modal-header i.icon-SVG-Closer-X {
+  color: #333333;
+
+  &:hover {
+    color: #627783;
+  }
+  &:focus {
+    color: #666666;
+  }
+}
+
+.ia-expand-collapse {
+  width: 24px;
+  height: 24px;
+  @extend .m-auto;
+  border-radius: 50%;
+  padding: 2px 4px 0 4px;
+}
+
+.ia-expanded-icon-transform {
+  display: inline-block;
+  transform-origin: 7px 5px;
+  transform: rotate(90deg) translateY(0.01px);
+  transition: 100ms ease-in-out;
+}
+
+.ia-button-link {
+  color: $ia-color-action-link;
+}
+
+.ia-search-design-component {
+  color: $ia-color-dark-charcoal;
+  border: 1px solid $ia-color-dark-charcoal;
+  padding-top: .5rem;
+  margin-bottom: .5rem;
+
+  .form-control {
+    background-color: $ia-color-white;
+    border-color: $ia-color-dark-charcoal;
+    color: #757575;
+
+    &:focus, &:active {
+      box-shadow: none;
+      border: 2px solid #666666;
+    }
+  }
+
+  .control-edit-icon, .control-delete-icon  {
+    i {
+      color: $ia-color-dark-charcoal;
+      opacity: .2;
+      &:hover {
+        color: #627783;
+      }
+      &:active {
+        color: #666666;
+      }
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .35);
+
+    .control-edit-icon, .control-delete-icon {
+      i {
+        color: $ia-color-dark-charcoal;
+        opacity: 1;
+        &:hover {
+          color: #627783;
+        }
+        &:active {
+          color: #666666;
+        }
+      }
+    }
+  }
+}
+
+.custom-switch .custom-control-input:checked ~ .custom-control-label::after {
+  transform: translateX(1.25rem);
+  padding: .15rem 0 0 .15rem
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: $ia-color-action-link;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before,
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: transparent;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(44,149,221,.25);
+}
+
+.custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.icon-filter {
+  color: $ia-color-action-button-foreground;
+}
+
+.p-calendar.p-calendar-w-btn .p-datepicker-trigger.p-button {
+  width: 2.357em;
+  height: auto;
+  color: $ia-color-white;
+  background-color: $ia-color-white;
+  border: 1px solid #ced4da;  // match bootstrap control
+  border-bottom-right-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+}
+
+.ia-popover-calendar-input {
+  height: 2rem;
+}
+
+.ia-popup-filter-overlay {
+  .p-overlaypanel-close {
+    line-height: 1.5em !important;
+    right: .3rem !important;
+    top: .3rem !important;
+    background-color: transparent !important;
+    color: $ia-color-dark-charcoal !important;
+    border: 1px solid $ia-color-dark-charcoal;
+
+    &:hover {
+      color: #627783 !important;
+      border: 1px solid #627783;
+    }
+  }
+}
+
+.ia-skipnav {
+  a {
+    background: #c2c2c2;
+    height: 2rem;
+    left: 50%;
+    padding: .5rem;
+    position: absolute;
+    transform: translateY(-100%);
+    transition: transform 0.3s;
+    z-index: 10000;
+
+    &:focus, &:active {
+      transform: translateY(0%);
+    }
+  }
+  text-align: left;
+}
+
+.ia-search-result-text-value-popover.ia-search-result-text-singleLine {
+  font-size: 0.9rem;
+  min-width: 200px;
+  max-width: 800px;
+  max-height: 500px;
+  .popover-body {
+    padding: 1rem 1rem 1rem 1rem;
+    overflow: auto;
+  }
+  .CodeMirror {
+    height: auto;
+    min-width: calc(200px - 2rem);
+    max-width: calc(800px - 4rem);
+    min-height: 2rem;
+    max-height: calc(500px - 4rem);
+    resize: horizontal;
+  }
+  .CodeMirror-scroll {
+    min-width: calc(200px - 2rem);
+    min-height: 2em;
+    overflow-y: hidden !important;
+    overflow-x: auto !important;
+    margin-bottom:  0;
+    margin-right:   0;
+    padding-bottom: 0;
+  }
+}
+
+.ia-search-result-text-value-popover.ia-search-result-text-multiLine {
+  font-size: 0.9rem;
+  min-width: 200px;
+  max-width: 800px;
+  max-height: 500px;
+  .popover-body {
+    padding: 1rem 1rem 0.5rem 1rem;
+    overflow: auto;
+  }
+  .CodeMirror {
+    height: auto;
+    min-width: calc(200px - 2rem);
+    max-width: calc(800px - 4rem);
+    min-height: 3rem;
+    max-height: calc(500px - 4rem);
+    resize: both;
+  }
+  .CodeMirror-scroll {
+    min-width: calc(200px - 2rem);
+    min-height: 3rem;
+    overflow: auto !important;
+    margin-bottom:  0;
+    margin-right:   0;
+    padding-bottom: 0;
+  }
+}
+
+.ia-z-index-3000 {
+  z-index: 3000 !important;
+}
+
+.ia-modal-table .modal-body {
+  padding-bottom: 0;
+}
+
+/* This is for listbox used in show/hide columns, move columns */
+body .p-listbox .p-listbox-header .p-listbox-filter-container input {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-left: 0.5rem;
+  padding-right: 1.5rem;
+  border: 1px solid #a6a6a6;
+}
+
+/* Truncate li text in p-listbox */
+ul.p-listbox-list li {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body .p-listbox .p-listbox-list .p-listbox-item.p-highlight {
+  color: $ia-color-dark-charcoal;
+  background-color: $ia-color-white;
+  &:hover {
+    background-color: #98a8b2;
+  }
+}
+
+body .p-listbox:not(.p-disabled) .p-listbox-item:not(.p-highlight):not(.p-disabled):hover {
+  color: $ia-color-dark-charcoal;
+  background-color: #98a8b2;
+}
+
+body .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+  color: $ia-color-dark-charcoal;
+  background-color: $ia-color-white;
+}
+
+%ia-checkbox-dark-gray-colors {
+  border-color: #757575;
+  background-color: #666666;
+  color: $ia-color-white;
+}
+
+.p-listbox-list-wrapper .p-checkbox .p-checkbox-box.p-highlight,
+.p-listbox-list-wrapper .p-checkbox .p-checkbox-box.p-highlight:not(.p-disabled):hover,
+.p-listbox-list-wrapper .p-checkbox .p-checkbox-box.p-highlight.p-focus {
+  @extend %ia-checkbox-dark-gray-colors;
+}
+
+// Opinionated: add "hand" cursor to non-disabled .btn elements
+// TODO: this should not be necessary if $enable-pointer-cursor-for-buttons is set to true
+.btn {
+  cursor: auto;
+  &:not(:disabled):not(.disabled) {
+    cursor: pointer;
+  }
+}
+
+// PrimeNg dropdown styles override for column filters
+.ia-filter-container {
+  .p-dropdown:not(.p-disabled):hover {
+    border-color: #212121;
+  }
+  .p-dropdown:not(.p-disabled).p-focus {
+    outline: 0 none;
+    outline-offset: 0;
+    -webkit-box-shadow: 0 0 0 0.2em #8dcdff;
+    -moz-box-shadow: 0 0 0 0.2em #8dcdff;
+    box-shadow: 0 0 0 0.2em #8dcdff;
+    border-color: #007ad9;
+  }
+  .p-dropdown .p-dropdown-clear-icon {
+    color: #848484;
+  }
+  .p-dropdown.p-dropdown-clearable .p-dropdown-label {
+    padding-right: 4em;
+  }
+  .p-dropdown-panel {
+    padding: 0;
+    border: 1px solid #c8c8c8;
+    background-color: #ffffff;
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  }
+  .p-dropdown-panel .p-dropdown-filter-container {
+    padding: 0.429em 0.857em 0.429em 0.857em;
+    border-bottom: 1px solid #eaeaea;
+    color: #333333;
+    background-color: #ffffff;
+    margin: 0;
+  }
+  .p-dropdown-panel .p-dropdown-filter-container .p-dropdown-filter {
+    width: 100%;
+    padding-right: 2em;
+  }
+  .p-dropdown-panel .p-dropdown-filter-container .p-dropdown-filter-icon {
+    top: 50%;
+    margin-top: -0.5em;
+    right: 1.357em;
+    color: #007ad9;
+  }
+  .p-dropdown-panel .p-dropdown-items {
+    padding: 0;
+  }
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item, .p-dropdown-panel .p-dropdown-items .p-dropdown-item-group {
+    margin: 0;
+    padding: 0.429em 0.857em;
+    border: 0 none;
+    color: #333333;
+    background-color: transparent;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+  }
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight, .p-dropdown-panel .p-dropdown-items .p-dropdown-item-group.p-highlight {
+    color: #ffffff;
+    background-color: #007ad9;
+  }
+  .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover, .p-dropdown-panel .p-dropdown-items .p-dropdown-item-group:not(.p-highlight):not(.p-disabled):hover {
+    color: #333333;
+    background-color: #eaeaea;
+  }
+  p-dropdown.ng-dirty.ng-invalid > .p-dropdown {
+    border: 1px solid #a80000;
+  }
+
+  .p-inputtext.ng-dirty.ng-invalid {
+    border: 1px solid #a80000;
+  }
+  .p-inputtext:enabled:hover:not(.p-error) {
+    border-color: #212121;
+  }
+  .p-inputtext:enabled:focus:not(.p-error) {
+    outline: 0 none;
+    outline-offset: 0;
+    -webkit-box-shadow: 0 0 0 0.2em #8dcdff;
+    -moz-box-shadow: 0 0 0 0.2em #8dcdff;
+    box-shadow: 0 0 0 0.2em #8dcdff;
+    border-color: #007ad9;
+  }
+
+  .p-inputtext {
+    font-size: 14px;
+    color: #333333;
+    background: #ffffff;
+    padding: 0.429em;
+    border: 1px solid #a6a6a6;
+    -moz-transition: border-color 0.2s;
+    -o-transition: border-color 0.2s;
+    -webkit-transition: border-color 0.2s;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .p-dropdown .p-dropdown-label {
+    display: block;
+    border: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: normal;
+    width: 100%;
+    padding-right: 2.5em;
+    font-weight: normal;
+  }
+}
+// end override for column filters
+
+.ia-modal-close-x {
+  position: absolute;
+  right: .8rem;
+  margin-top: .8rem;
+  padding: .2rem;
+  visibility: hidden !important;
+}
+
+// fix webkit-focus-ring-color
+:focus {
+  outline: 2px solid $ia-focus-ring-color;
+  outline-offset: -1px;
+}
+
+input[type=checkbox]:focus {
+  border-color: $ia-focus-ring-color;
+  outline: 0;
+  box-shadow: 0 0 0 0.1em #8dcdff;
+}
+
+button:focus {
+  outline: 2px solid $ia-focus-ring-color;
+  outline-offset: -1px;
+}
+
+.nav-scroll {
+  &-wrapper {
+    margin-left: 2px;
+    margin-right: 2px;
+    .nav-item {
+      max-width: 15rem;
+      a {
+        @extend %ia-text-truncate;
+      }
+    }
+  }
+
+  &-btn {
+    width: 3.375rem;
+    flex: 0 0 3.375rem;
+    background-color: transparent;
+    border: 1px solid #cccccc;
+  }
+}
+
+/* Begin CAS */
+.list-group-item .ia-app-listing-btn-circle {
+  margin: 0;
+}
+
+.ia-tab-popover.popover {
+  max-width: 50rem;
+}
+/* end CAS */
+
+.p-chips-token-label {
+  @extend %ia-text-truncate;
+}
+
+/* search criteria chips */
+.ia-search-qstring-container {
+  li.p-chips-token:not(:first-child):not(:last-child){
+    margin-left: .3rem;
+  }
+
+  .p-corner-all {
+    border-radius: 5px;
+  }
+
+  @-moz-document url-prefix() {
+    .p-chips {
+      scrollbar-width: thin;
+      scrollbar-color: white silver;
+    }
+  }
+
+  .p-chips {
+    display: inline-block;
+    vertical-align: middle;
+    height: 1.75rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-width: 100%;
+    @extend %ia-text-truncate;
+    &-token {
+      border: 1px solid;
+      .p-chips-token-label {
+        margin-right: 0;
+      }
+      &-icon {
+        display: none;
+      }
+    }
+  }
+
+  .p-chips-input-token {
+    display: none;
+  }
+}
+
+.ui-virtualscroller-content {
+  height: 225px;
+  overflow: auto;
+  contain: strict;
+  position: relative;
+  will-change: scroll-position;
+}
+
+.ui-virtualscroller-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  contain: content;
+  min-width: 100%;
+  font-size: 14px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ui-virtualscroller-list li {
+  height: 25px;
+}
+/* end - search criteria chips */
+
+// override theme.css hard coded fonts for the following glasses
+.p-inputtext, .p-chips .p-chips-multiple-container .p-chips-input-token input {
+  font-family: 'OpenText Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: .8rem;
+}
+
+.p-datepicker .p-timepicker button {
+  width: 1.2rem;
+  height: 1.2rem;
+  color: #a6a6a6;
+  border: 0 none;
+  background: transparent;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.ia-table-paginator-container {
+  height: calc(100% - 50px);
+
+  &-empty .p-datatable-scrollable-body {
+    overflow-y: auto !important;
+  }
+}
+
+.ia-datatable-no-scroll-bar .p-datatable-scrollable-body {
+  overflow-y: auto !important;
+}
+
+.p-dialog .p-dialog-header {
+  border-bottom: none;
+  background: inherit;
+  padding: .5em .75em;
+}
+
+.p-dialog .p-dialog-content {
+  background: inherit;
+}
+
+.ia-tab-scroll-button {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  margin-top: .4rem;
+}
+
+/* compliance dashboard bar chart svg classes */
+.ia-dashboard-compliance-bar-chart {
+  .legend {
+    fill: black;
+    text-anchor: start;
+    font-size: 13px;
+  }
+
+  text {
+    fill: #212529;
+    font-size: .8rem;
+    text-anchor: end;
+  }
+
+  .label {
+    fill: black;
+    text-anchor: end;
+  }
+
+  //.bar:hover {
+  //  fill: brown;
+  //}
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+  }
+}
+
+/* filter clear all button */
+.ia-action-clear-all {
+  position: absolute;
+  right: 1.5rem;
+}
+
+/* work in progress water mark, remove corresponding HTML fragment prior to release */
+.work-in-progress {
+  position: absolute;
+  height: 4rem;
+  width: inherit;
+  top: 50%;
+  z-index: 1000;
+  color: gray;
+  opacity: .5;
+  font-size: 3rem;
+  transform: rotateY(0deg) rotate(315deg); /* needs Y at 0 deg to behave properly*/
+  transition: transform 2s;
+}
+
+/* p-calendar inside secondary nav was black on white */
+#ia-secondary-navbar-third-section {
+  .p-calendar.p-calendar-w-btn input.p-inputtext, .p-calendar.p-calendar-w-btn .p-datepicker-trigger.p-button {
+    background-color: transparent;
+    color: $ia-color-white;
+  }
+  .p-button-icon.form-control-feedback.icon-SVG_Calendar {
+    color: $ia-color-white;
+  }
+  .p-datepicker-trigger, .form-control {
+    margin-top: .25rem;
+    height: 1.65rem;
+  }
+  .form-control {
+    width: 100%;
+  }
+  .p-calendar.p-calendar-w-btn input.p-inputtext {
+    padding-left: .25rem;
+    padding-right: .25rem;
+  }
+}
+
+/* Fix download button on OTIV 21.3 */
+#ot-iv div.pi-download {
+  font-family: 'primeicons';
+  font-size: 20px;
+}
+
+.ia-description-popover {
+  max-width: none !important;
+}
+
+/* dashboard tooltip */
+.ia-dashboard-tooltip {
+  opacity: 0;
+  background-color: white;
+  border: 1px solid;
+  padding: .5rem;
+  width: 20rem;
+
+  &-header {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  &-content-label {
+    font-size: .8rem;
+    text-align: left;
+  }
+
+  &-content-value {
+    font-size: .8rem;
+    text-align: right;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 1070;
+  display: block;
+  margin: 0;
+  font-family: OpenText Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-break: normal;
+  word-spacing: normal;
+  white-space: normal;
+  line-break: auto;
+  font-size: .7rem;
+  word-wrap: break-word;
+  opacity: 0;
+}
+/* end - dashboard tooltip */
+
+/* Begin - tooltip classes */
+.ia-popover-tooltip {
+  max-width: 20vw;
+}
+
+.ia-info-button {
+  margin-left: .25rem;
+  margin-right: .25rem;
+  width: 1rem;
+  text-align: center;
+  padding: 0;
+}
+
+.ia-warn-button {
+  margin-left: .25rem;
+  margin-right: .25rem;
+  width: 1rem;
+  text-align: center;
+  padding: 0;
+  color:#e69021 !important;
+}
+// this classes are missing from theme.css
+.p-virtualscroller-list {
+  border: 1px solid lightgrey;
+}
+
+.p-virtualscroller-item {
+  margin: 0 2px;
+}
+/* End - tooltip classes */
+
+.ia-viewer-brava-window {
+  background-color: $ia-color-black;
+  width: 70%;
+  height: 100%;
+}
+
+.ia-viewer-browser-window {
+  background-color: $ia-color-black;
+  width: auto;
+  height: auto;
+}
+
+$ia-icon-colors: (
+  "white": $ia-color-white,
+  "black": $ia-color-black
+);
+
+@each $color, $value in $ia-icon-colors {
+  .ia-icon-#{$color} i {
+    color: $value !important;
+  }
+}
+
+%button-format {
+  position: relative;
+  top: -0.3rem;
+  width: max-content;
+  margin: 0 .25rem;
+}
+
+.p-button.p-togglebutton.ia-timeline-button {
+  &-default {
+    @extend %button-format;
+    border: 1px solid transparent;
+    color: #000000;
+    background: none;
+  }
+
+  &-selected {
+    @extend %button-format;
+    border: 1px solid #007ad9;
+    color: #ffffff;
+    background: #007ad9;
+  }
+}
+
+.ia-timeline-content-horizontal {
+  .p-timeline-event-opposite {
+    padding-top: .5rem !important;
+  }
+  .p-timeline-event-separator {
+    transform: translateX(2rem);
+  }
+}
+
+.ia-timeline-content {
+  .p-timeline-event-opposite {
+    display: none;
+  }
+}
+
+.ia-search-toggle-div {
+  position: absolute;
+  right: 1rem;
+}
+
+.ia-number-sort-right-align {
+  text-align: right !important;
+  padding-right: 0.8rem !important;
+  align-items: flex-end !important;
+}
+
+
+.p-component-overlay-enter {
+  animation: p-component-overlay-enter-animation 150ms forwards;
+}
+
+.p-component-overlay-leave {
+  animation: p-component-overlay-leave-animation 150ms forwards;
+}
+
+@keyframes p-component-overlay-enter-animation {
+  from {
+    background-color: transparent;
+  }
+  to {
+    background-color: var(--maskbg);
+  }
+}
+@keyframes p-component-overlay-leave-animation {
+  from {
+    background-color: var(--maskbg);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+button .icon-IA-Icons-resize-caret-right, button icon-IA-Icons-resize-caret-right ia-expanded-icon-transform {
+  // center icon, focus ring off center
+  padding-left: 1px;
+}
+
+textarea {
+  resize: none;
+}
+
+/* Begin code for permanent vertical scroll bar */
+.ia-table-paginator-container-empty {
+  .p-datatable-flex-scrollable > .p-datatable-wrapper {
+    overflow-y: initial;
+  }
+}
+
+.ia-table-paginator-container {
+  .p-datatable-flex-scrollable > .p-datatable-wrapper {
+    overflow-y: scroll;
+  }
+
+  .p-datatable-flex-scrollable {
+    padding-right: 1px;
+    background-color: #f1f1f1;
+  }
+
+  .p-datatable-wrapper {
+    background-color: white;
+  }
+  //.p-datatable-thead {
+  //  padding-right: 0;
+  //}
+
+  .p-datatable .table {
+    // height: calc(100% - 40px);
+  }
+
+  // Remove scrolling from outer container
+  //.p-datatable-resizable > .p-datatable-wrapper {
+  //  overflow-y: hidden !important;
+  //}
+
+
+  // Add permanent scroll bar
+  //.p-element.p-datatable-tbody {
+  //  overflow-y: scroll;
+  //  height: 100%;
+  //}
+
+  // First table header
+  //p-table:not(p-table p-table) thead:not(tbody thead).p-datatable-thead {
+  //  padding-right: 17px !important;
+  //}
+
+  // Child table remove permanent scroll bar
+  //p-table:not(p-table p-table) tbody:not(tbody tbody) .p-element.p-datatable-tbody {
+  //  overflow-y: initial !important;
+  //}
+}
+
+/* End code for permanent vertical scroll bar */
+
+/* Start PrimeNG tab view */
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  border: none;
+  background: transparent;
+  font-weight: normal;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background-color: transparent;
+  border-bottom: 5px solid #232e72;
+  color: black;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+  border-bottom-color: #232e72;
+  outline: 1px solid #2e3d98;
+  outline-offset: -1px;
+  background: none !important;
+  box-shadow: none;
+}
+
+.p-tabview .p-tabview-nav li:not(.p-highlight):not(.p-disabled):hover .p-tabview-nav-link {
+  background: none;
+  border-bottom: 5px solid #0084ce;
+}
+/* End PrimeNG tab view */
+
+.h4 {
+  font-size: 1.02rem;
+}
+
+.h5 {
+  font-size: .911rem;
+}
