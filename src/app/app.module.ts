@@ -15,12 +15,14 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormsModule} from "@angular/forms";
 import {CalendarModule} from "primeng/calendar";
 import {SelectButtonModule} from "primeng/selectbutton";
+import { ResumeComponent } from './resume/resume.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardViewComponent,
-    PopupFilterComponent
+    PopupFilterComponent,
+    ResumeComponent
   ],
   imports: [
     BrowserModule,
