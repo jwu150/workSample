@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from "primeng/api";
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 type MODE = 'grid' | 'list';
 interface SELECT {
@@ -17,7 +16,7 @@ interface SELECT {
   styleUrls: ['./card-view.component.scss']
 })
 
-export class CardViewComponent implements OnInit{
+export class CardViewComponent implements OnInit {
   items: MenuItem[] = [];
 
   gridViewConfig: SELECT = {
@@ -45,7 +44,7 @@ export class CardViewComponent implements OnInit{
     "lastModifiedDate": "2023-04-27T00:52:02.387Z",
     "version": 2,
     "id": "a554064b-7b32-4ebc-9c61-681be59028f4",
-    "name": "PhoneCalls",
+    "name": "PhoneCallLogs",
     "tenant": "http://localhost:8080/restapi/systemdata/tenants/ac3a066e-b52b-42ba-bf9f-b96fe98ddde5",
     "type": "APP_DECOMM",
     "archiveType": "SIP",
@@ -53,7 +52,7 @@ export class CardViewComponent implements OnInit{
     "state": "IN_TEST",
     "cacheState": "CACHED_IN",
     "viewStatus": true,
-    "description": "This application archives customer support calls. This SIP application demonstrates how to configure a holding to apply retention automatically to the package on ingestion, and includes encryption and unstructured data.",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.",
     "category": "Example Application",
     "retentionEnabled": false,
     "defaultRetentionPolicyName": null,
@@ -69,7 +68,7 @@ export class CardViewComponent implements OnInit{
     "lastModifiedDate": "2023-04-27T00:52:02.387Z",
     "version": 2,
     "id": "a554064b-7b32-4ebc-9c61-681be59028f4",
-    "name": "PhoneCalls",
+    "name": "PhoneCallLogs",
     "tenant": "http://localhost:8080/restapi/systemdata/tenants/ac3a066e-b52b-42ba-bf9f-b96fe98ddde5",
     "type": "ACTIVE_ARCHIVING",
     "archiveType": "SIP",
@@ -77,7 +76,7 @@ export class CardViewComponent implements OnInit{
     "state": "CACHED_OUT",
     "cacheState": "CACHED_IN",
     "viewStatus": true,
-    "description": "This application archives customer support calls. This SIP application demonstrates how to configure a holding to apply retention automatically to the package on ingestion, and includes encryption and unstructured data.",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.",
     "category": "Example Application",
     "retentionEnabled": false,
     "defaultRetentionPolicyName": null,
@@ -93,7 +92,7 @@ export class CardViewComponent implements OnInit{
     "lastModifiedDate": "2023-04-27T00:52:02.387Z",
     "version": 2,
     "id": "a554064b-7b32-4ebc-9c61-681be59028f4",
-    "name": "PhoneCalls",
+    "name": "PhoneCallLogs",
     "tenant": "http://localhost:8080/restapi/systemdata/tenants/ac3a066e-b52b-42ba-bf9f-b96fe98ddde5",
     "type": "APP_DECOMM",
     "archiveType": "SIP",
@@ -101,7 +100,7 @@ export class CardViewComponent implements OnInit{
     "state": "IN_TEST",
     "cacheState": "CACHED_IN",
     "viewStatus": true,
-    "description": "This application archives customer support calls. This SIP application demonstrates how to configure a holding to apply retention automatically to the package on ingestion, and includes encryption and unstructured data.",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.",
     "category": "Example Application",
     "retentionEnabled": false,
     "defaultRetentionPolicyName": null,
@@ -117,7 +116,7 @@ export class CardViewComponent implements OnInit{
     "lastModifiedDate": "2023-04-27T00:52:02.387Z",
     "version": 2,
     "id": "a554064b-7b32-4ebc-9c61-681be59028f4",
-    "name": "PhoneCalls",
+    "name": "PhoneCallLogs",
     "tenant": "http://localhost:8080/restapi/systemdata/tenants/ac3a066e-b52b-42ba-bf9f-b96fe98ddde5",
     "type": "ACTIVE_ARCHIVING",
     "archiveType": "SIP",
@@ -125,7 +124,7 @@ export class CardViewComponent implements OnInit{
     "state": "IN_TEST",
     "cacheState": "CACHED_IN",
     "viewStatus": true,
-    "description": "This application archives customer support calls. This SIP application demonstrates how to configure a holding to apply retention automatically to the package on ingestion, and includes encryption and unstructured data.",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.",
     "category": "Example Application",
     "retentionEnabled": false,
     "defaultRetentionPolicyName": null,
@@ -141,7 +140,7 @@ export class CardViewComponent implements OnInit{
     "lastModifiedDate": "2023-04-27T00:52:02.387Z",
     "version": 2,
     "id": "a554064b-7b32-4ebc-9c61-681be59028f4",
-    "name": "PhoneCalls",
+    "name": "PhoneCallLogs",
     "tenant": "http://localhost:8080/restapi/systemdata/tenants/ac3a066e-b52b-42ba-bf9f-b96fe98ddde5",
     "type": "ACTIVE_ARCHIVING",
     "archiveType": "SIP",
@@ -149,7 +148,7 @@ export class CardViewComponent implements OnInit{
     "state": "CACHED_OUT",
     "cacheState": "CACHED_IN",
     "viewStatus": true,
-    "description": "This application archives customer support calls. This SIP application demonstrates how to configure a holding to apply retention automatically to the package on ingestion, and includes encryption and unstructured data.",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.",
     "category": "Example Application",
     "retentionEnabled": false,
     "defaultRetentionPolicyName": null,
@@ -165,7 +164,7 @@ export class CardViewComponent implements OnInit{
     "lastModifiedDate": "2023-04-27T00:52:02.387Z",
     "version": 2,
     "id": "a554064b-7b32-4ebc-9c61-681be59028f4",
-    "name": "PhoneCalls",
+    "name": "PhoneCallLogs",
     "tenant": "http://localhost:8080/restapi/systemdata/tenants/ac3a066e-b52b-42ba-bf9f-b96fe98ddde5",
     "type": "ACTIVE_ARCHIVING",
     "archiveType": "SIP",
@@ -173,7 +172,7 @@ export class CardViewComponent implements OnInit{
     "state": "IN_TEST",
     "cacheState": "CACHED_IN",
     "viewStatus": true,
-    "description": "This application archives customer support calls. This SIP application demonstrates how to configure a holding to apply retention automatically to the package on ingestion, and includes encryption and unstructured data.",
+    "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.",
     "category": "Example Application",
     "retentionEnabled": false,
     "defaultRetentionPolicyName": null,

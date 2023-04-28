@@ -1,0 +1,350 @@
+<button #target type="button"
+        class="btn btn-primary"
+        style="pointer-events: auto;"
+        [attr.aria-haspopup]="true"
+        [attr.aria-label]="'FILTER'"
+        [attr.aria-expanded]="!popupHidden"
+        [title]="disableMessage && disabled ? disableMessage: ''"
+        (click)="togglePopup($event, target)">
+  <i class="pi pi-filter-fill"></i>
+</button>
+  <ng-container *ngIf="templateType ===  'ENUM' ; else nonENUM">
+    <div class="d-flex justify-content-start">
+      <div class="ia-filter-value text-truncate" id="ia-search-filter-dattime-{{colIndex}}" title="{{ toolTip }}"
+           [attr.aria-label]="toolTip">
+        <span>{{ displayValue }}</span>
+        <span [hidden]="!(selectedOperator.label === 'BETWEEN' && displayValue2 !== '')"> - {{ displayValue2 }}</span>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #nonENUM>
+    <div class="d-flex justify-content-start" [ngClass]="{'justify-content-end !important': isNumber()}">
+      <div class="ia-filter-value text-truncate" id="ia-search-filter-dattime-{{colIndex}}" title="{{ toolTip }}"
+           [attr.aria-label]="toolTip">
+        <span>{{ displayValue}}</span>
+        <span *ngIf="shouldDisplayDash()" class="ml-2 mr-2 my-3" style="font-size: 1.25rem; font-weight: 600;">-</span>
+        <span [hidden]="!(selectedOperator.label === 'BETWEEN' && displayValue2 !== '')">{{ displayValue2 }}</span>
+      </div>
+    </div>
+  </ng-template>
+<p-overlayPanel #popContent [dismissable]="true" appendTo="body" [baseZIndex]="1050" (onShow)="onFilterShow()" (onHide)="onFilterHide()"
+                [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" styleClass="ia-popup-filter-overlay">
+  <label id="ia-popup-filter-label" for="ia-search-run-inline-filter-trigger" class="font-weight-bold my-1">
+    {{ column.label }}
+  </label>
+  <div [ngSwitch]="templateType" class="ia-filter-container" (keydown.esc)="this.filterPopup.hide(); resetFocus();">
+    <span tabindex="0" (focus)="returnFocusToTop();"></span>
+    <ng-container *ngSwitchCase="'STRING'">
+      <div class="d-flex justify-content-start">
+        <div class="mr-1">
+          <p-dropdown
+            [options]="filterOperators"
+            [(ngModel)]="selectedOperator"
+            (ngModelChange)="inputChanged($event)"
+            [showTransitionOptions]="'0ms'"
+            [hideTransitionOptions]="'0ms'"
+            [style]="{'width':'5rem', 'min-width':'0', 'font-size': '1.2rem'}"
+            [dropdownIcon]="'pi pi-caret-down'"
+            name="opDropDown"
+            #opDropDown="ngModel"
+            [inputId]="'ia-search-run-inline-filter-trigger'">
+            <ng-template let-item pTemplate="selectedItem">
+              <div class="ia-filter-dropdown" [attr.aria-label]="item.label">
+                <span class="text-muted ml-2" title="{{ item.label}}">
+                  <i class="pi {{ item.value.iconCls }}"></i>
+                </span>
+              </div>
+            </ng-template>
+            <ng-template let-item pTemplate="item">
+              <div class="d-flex justify-content-start">
+                <div><i class="pi {{ item.value.iconCls }} mr-2"></i></div>
+                <div class="text-nowrap mx-2">{{ item.label }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+        <div>
+          <input type="text"
+                 class="form-control"
+                 #input1="ngModel"
+                 #inputField1
+                 [(ngModel)]="inputValue"
+                 pInputText
+                 (ngModelChange)="inputChanged($event)"
+                 (keydown.enter)="applyFilter($event)"
+                 name="input1"
+                 id="ia-search-run-strfilter"
+                 [attr.aria-labelledby]="'ia-popup-filter-label'"
+          >
+        </div>
+        <div>
+          <button class="btn btn-primary ia-search-filter-no-between-go-btn ml-1" id="ia-search-filter-no-between-go-btn" (click)="applyFilter($event);"
+                  [disabled]="disabled || (!input1.dirty && !opDropDown.dirty) || (!input1.value || input1.value.length === 0)">
+            Submit
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'NUMBER'">
+      <div class="d-flex justify-content-start">
+        <div class="mr-1">
+          <p-dropdown
+            [options]="filterOperators"
+            [(ngModel)]="selectedOperator"
+            (ngModelChange)="inputChanged($event)"
+            [style]="{'min-width':'0', 'font-size': '1.2rem'}" [dropdownIcon]="'pi pi-caret-down'"
+            name="opDropDown"
+            #opDropDown="ngModel"
+            [inputId]="'ia-search-run-inline-filter-trigger'">
+            <ng-template let-item pTemplate="selectedItem">
+              <div class="ia-filter-dropdown" [attr.aria-label]="item.label">
+              <span class="text-muted ml-2" title="{{ item.label}}">
+                <i class="pi {{item.value.iconCls}}"></i>
+              </span>
+              </div>
+            </ng-template>
+            <ng-template let-item pTemplate="item">
+              <div class="d-flex justify-content-start">
+                <div><i class="pi {{ item.value.iconCls }} mr-2"></i></div>
+                <div class="text-nowrap mx-2">{{ item.label }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+        <div>
+          <input type="text"
+                 class="form-control"
+                 iaDecimalInput
+                 #inputField1
+                 [(ngModel)]="inputValue"
+                 pInputText
+                 (ngModelChange)="inputChanged($event)"
+                 (keydown.enter)="applyFilter($event)"
+                 name="input1"
+                 #input1="ngModel"
+                 [attr.aria-labelledby]="'ia-popup-filter-label'"
+                 id="ia-search-run-strfilter">
+          <div [hidden]="selectedOperator.label !== 'BETWEEN'" class="mt-2">
+            <input type="text" class="form-control" iaDecimalInput #input2 [(ngModel)]="inputValue2" pInputText (ngModelChange)="inputChanged($event)"
+                   (keydown.enter)="applyFilter($event)">
+          </div>
+        </div>
+        <div>
+          <button *ngIf="selectedOperator.label !== 'BETWEEN'" class="btn btn-primary ia-search-filter-no-between-go-btn ml-1"
+                  id="ia-search-filter-no-between-go-btn" (click)="applyFilter($event)" [disabled]="!input1.dirty && !opDropDown.dirty"
+                  (keydown.enter)="applyFilter($event)">
+            Submit
+          </button>
+          <button *ngIf="selectedOperator.label === 'BETWEEN'" class="btn btn-primary ia-search-filter-no-between-go-btn ml-1"
+                  id="ia-search-filter-no-between-go-btn" (click)="applyFilter($event)"
+                  [disabled]="filterRangeViolation('NUMBER') || isBetweenRequired()"
+                  (keydown.enter)="applyFilter($event)">
+            Submit
+          </button>
+        </div>
+      </div>
+      <div class="form-control-feedback mt-2" [hidden]="selectedOperator.label !== 'BETWEEN'"
+           *ngIf="filterRangeViolation('NUMBER')">
+        <span class="text-danger"><i class="icon-SVG_Error pr-1"></i>{{ 'DEFAULT_TO_VALUE_MUST_GE_FROM_VALUE' }}</span>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'DATE'">
+      <form (ngSubmit)="applyFilter($event)" name="filterForm" class="form-horizontal" role="form" #filterForm="ngForm">
+        <div class="d-flex justify-content-start">
+          <div class="mr-1">
+            <p-dropdown
+              [options]="filterOperators"
+              [(ngModel)]="selectedOperator"
+              (ngModelChange)="inputChanged($event)"
+              [style]="{'width':'5rem', 'min-width':'0', 'font-size': '1.2rem'}"
+              [dropdownIcon]="'pi pi-caret-down'"
+              #opDropDown="ngModel"
+              name="opDropDown"
+              [inputId]="'ia-search-run-inline-filter-trigger'">
+              <ng-template let-item pTemplate="selectedItem">
+                <div class="ia-filter-dropdown" style="min-width:150px" [attr.aria-label]="item.label">
+                <span class="text-muted ml-2" title="{{ item.label}}">
+                  <i class="pi {{item.value.iconCls}}"></i>
+                </span>
+                </div>
+              </ng-template>
+              <ng-template let-item pTemplate="item">
+                <div class="d-flex justify-content-start" style="min-width:150px">
+                  <div><i class="pi {{ item.value.iconCls }} mr-2"></i></div>
+                  <div class="text-nowrap mx-2">{{ item.label }}</div>
+                </div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+          <div>
+            <div class="d-flex">
+              <p-calendar [showIcon]="true"
+                          [styleClass]="'mx-2'"
+                          icon="pi pi-calendar"
+                          [yearNavigator]="true"
+                          yearRange="1970:2070"
+                          (keydown.esc)="onCalendarEsc($event);"
+                          [inputId]="'ia-search-run-datefilter-from-value'"
+                          inputStyleClass="ia-popover-calendar-input"
+                          [(ngModel)]="inputValue"
+                          dateFormat="{{inputFormat.format}}"
+                          placeholder="{{ inputFormat.placeHolder }}"
+                          (onSelect)="onDate1Select()"
+                          (ngModelChange)="inputChanged($event)"
+                          [hideOnDateTimeSelect]="true"
+                          [showTransitionOptions]="'0ms'"
+                          [hideTransitionOptions]="'0ms'"
+                          name="date1"
+                          #date1="ngModel"
+                          iaStopPropagation
+                          (onShow)="addAriaAttributes()"
+                          iaCalendarAttr
+                          #calendar>
+              </p-calendar>
+              <ng-container *ngIf="column.dataType === 'DATETIME'">
+                <p-calendar [timeOnly]="true"
+                            [styleClass]="'mx-2'"
+                            icon="pi pi-stopwatch"
+                            [inputId]="'ia-search-run-datefilter-from-time'"
+                            [showIcon]="true"
+                            dateFormat="{{ inputFormat.format }}"
+                            hourFormat="{{ inputFormat.hourFormat }}"
+                            [showSeconds]="true"
+                            placeholder="hh:mm:ss"
+                            [(ngModel)]="timeValue1"
+                            (ngModelChange)="inputTime1Changed($event)"
+                            [hideOnDateTimeSelect]="true"
+                            [showTransitionOptions]="'0ms'"
+                            [hideTransitionOptions]="'0ms'"
+                            name="time1"
+                            #time1="ngModel"
+                            (keydown.esc)="onCalendarEsc($event);"
+                            iaCalendarAttr
+                            iaStopPropagation>
+                </p-calendar>
+                <input id="ms-input" class="w-10 mr-1 pl-1 pr-1 ia-filter-input-ms form-control" pInputText type="number" size="3" min="0" placeholder="SSS"
+                       max="999" [(ngModel)]="milliseconds1" name="msInput1" #msInput1="ngModel" [attr.aria-labelledby]="'ia-popup-filter-label'">
+                <label for="ms-input"></label>
+              </ng-container>
+            </div>
+            <div class="mt-2" [hidden]="selectedOperator.label !== 'BETWEEN'">
+              <p-calendar
+                [styleClass]="'mx-2'"
+                [yearNavigator]="true"
+                yearRange="1970:2070"
+                [showIcon]="true"
+                inputStyleClass="ia-popover-calendar-input"
+                [(ngModel)]="inputValue2"
+                dateFormat="{{inputFormat.format}}"
+                placeholder="{{ inputFormat.placeHolder }}"
+                (onSelect)="onDate2Select()"
+                [inputId]="'ia-search-run-datefilter-to-value'"
+                (ngModelChange)="inputChanged($event)"
+                [hideOnDateTimeSelect]="true"
+                [showTransitionOptions]="'0ms'"
+                [hideTransitionOptions]="'0ms'"
+                name="date2"
+                #date2="ngModel"
+                iaStopPropagation
+                iaCalendarAttr
+                (keydown.esc)="onCalendarEsc($event);"
+                (onShow)="addAriaAttributes()"
+                ia-nested-element="aria-label,input">
+              </p-calendar>
+              <ng-container *ngIf="column.dataType === 'DATETIME'">
+                <p-calendar
+                  [styleClass]="'mx-2'"
+                  icon="pi pi-stopwatch"
+                  [showIcon]="true"
+                  [timeOnly]="true"
+                  hourFormat="12"
+                  [showSeconds]="true"
+                  class="ml-2"
+                  [(ngModel)]="timeValue2"
+                  dateFormat="{{inputFormat.format}}"
+                  placeholder="hh:mm:ss"
+                  (ngModelChange)="inputTime2Changed($event)"
+                  [hideOnDateTimeSelect]="true"
+                  [showTransitionOptions]="'0ms'"
+                  [inputId]="'ia-search-run-datefilter-to-time'"
+                  [hideTransitionOptions]="'0ms'"
+                  aria-label="Time"
+                  name="time2"
+                  #time2="ngModel"
+                  ia-nested-element="aria-label,input"
+                  [attr.ia-nested-element-aria-label-selector]="'p-calendar button.p-datepicker-trigger'"
+                  [attr.ia-nested-element-aria-label-attr]="'aria-labelledby'"
+                  [attr.ia-nested-element-aria-label-value]="'ia-popup-filter-label'"
+                  [attr.ia-nested-element-input-selector]="'p-calendar input.p-inputtext'"
+                  [attr.ia-nested-element-input-attr]="'aria-labelledby'"
+                  [attr.ia-nested-element-input-value]="'ia-popup-filter-label'"
+                  (onShow)="addAriaAttributes()"
+                  (keydown.esc)="onCalendarEsc($event);"
+                  iaCalendarAttr
+                  iaStopPropagation>
+                </p-calendar>
+                <input id="ms-input2" class="w-10 mr-1 pl-1 pr-1 ia-filter-input-ms form-control" pInputText type="number" size="3" min="0" max="999"
+                       [(ngModel)]="milliseconds2" name="msInput2" #msInput2="ngModel" [attr.aria-labelledby]="'ia-popup-filter-label'">
+                <label for="ms-input2"></label>
+              </ng-container>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary ia-search-filter-no-between-go-btn mx-2" id="ia-search-filter-no-between-go-btn" type="submit">
+              Submit
+            </button>
+          </div>
+        </div>
+        <div class="form-control-feedback mt-2" [hidden]="selectedOperator.label !== 'BETWEEN'"
+             *ngIf="filterRangeViolation('DATE')">
+          <span class="text-danger"><i class="icon-SVG_Error pr-1"></i>{{ 'DEFAULT_TO_VALUE_MUST_GE_FROM_VALUE' }}</span>
+        </div>
+        <div class="form-control-feedback mt-2" *ngIf="msInvalid()">
+          <span class="text-danger"><i class="icon-SVG_Error pr-1"></i>{{ 'MILLISECONDS_OUT_OF_RANGE' }}</span>
+        </div>
+      </form>
+    </ng-container>
+    <ng-container *ngSwitchCase="'ENUM'">
+      <div class="d-flex justify-content-start">
+        <div class="mr-1">
+          <p-dropdown
+            [options]="filterOperators"
+            [(ngModel)]="selectedOperator"
+            (ngModelChange)="inputChanged($event)"
+            [style]="{'width':'5rem', 'min-width':'0', 'font-size': '1.2rem'}"
+            [dropdownIcon]="'pi pi-caret-down'"
+            name="opDropDown"
+            #opDropDown="ngModel"
+            [inputId]="'ia-search-run-inline-filter-trigger'">
+            <ng-template let-item pTemplate="selectedItem">
+              <div class="ia-filter-dropdown" [attr.aria-label]="item.label">
+              <span class="text-muted ml-2" title="{{ item.label}}">
+                <i class="pi {{item.value.iconCls}}"></i>
+              </span>
+              </div>
+            </ng-template>
+            <ng-template let-item pTemplate="item">
+              <div class="d-flex justify-content-start">
+                <div><i class="pi {{ item.value.iconCls }} mr-2"></i></div>
+                <div class="text-nowrap mx-2">{{ item.label }}</div>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+        <div>
+          <select id="ia-search-run-enumfilter" class="form-control" name="input1" #input1="ngModel"
+                  #inputField1 [(ngModel)]="inputValue" (ngModelChange)="enumSelectionChanged($event)" aria-label="Filter">
+            <option [ngValue]="item.value" *ngFor="let item of enumItems">{{item.label}}</option>
+          </select>
+        </div>
+        <div>
+          <button class="btn btn-primary ia-search-filter-no-between-go-btn ml-1" id="ia-search-filter-no-between-go-btn" (click)="applyFilter($event);"
+                  [disabled]="(!input1 || !input1.value || input1.value.length === 0) || (!input1.dirty && !opDropDown.dirty)">
+            Submit
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <span tabindex="0" (focus)="returnFocusToTop();"></span>
+  </div>
+</p-overlayPanel>

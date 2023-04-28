@@ -20,7 +20,7 @@
               </p>
             </div>
             <div class="card-footer d-flex flex-row justify-content-between mx-1">
-              <div tabindex="0" class="text-muted">
+              <div class="text-muted">
                 <i *ngIf="application.type === 'ACTIVE_ARCHIVING'" id="ia-la-apptype-{{i}}" class="pi pi-history"
                    role="img" [attr.aria-label]="'ACTIVE_ARCHIVING'" title="Active Archiving"></i>
                 <i *ngIf="application.type === 'APP_DECOMM'" id="ia-la-apptype-{{i}}" class="pi pi-power-off"
@@ -61,8 +61,7 @@
       <ng-container>
         <div class="float-right dropdown ia-grid-dropdown">
           <p-menu #menu [model]="items" [popup]="true" appendTo="body"></p-menu>
-          <button class="ia-app-listing-btn-circle" pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars" label="Show">
-            <i class="pi pi-bars" style="color: slateblue"></i>
+          <button class="ia-app-listing-btn-circle" pButton type="button" (click)="menu.toggle($event)" icon="pi pi-bars">
           </button>
         </div>
       </ng-container>

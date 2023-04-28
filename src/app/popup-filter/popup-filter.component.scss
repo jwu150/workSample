@@ -1,0 +1,62 @@
+@import "../../assets/variables.scss";
+
+.ia-filter-container {
+  .p-dropdown {
+    width: 5rem;
+  }
+}
+
+.ia-popover-button {
+  width: calc(100% - 0.3rem);
+  &.btn-link:hover {
+    background-color: transparent;
+  }
+}
+
+.ia-filter-dropdown {
+  min-width: 0 !important;
+  line-height: calc(1rem + 2px);
+  width: 3.5rem;
+}
+
+.ia-filter-value {
+  line-height: 1.5rem;
+  height: 1.5rem;
+}
+
+.ia-filter-input-ms {
+  float: right;
+  width: 4rem;
+  height: 2rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.ia-filter-icon {
+  font-size: 1.2em;
+  color: $ia-color-action-button-foreground;
+}
+
+.ia-filter-btn-close {
+  position: absolute;
+  top: 3em;
+  padding: 0;
+}
+
+.ia-search-filter-no-between-go-btn {
+  //height: 2rem;
+}
+
+.ia-search-filter-icon {
+  margin-right: .1rem;
+}
+
+input.p-inputtext {
+  height: 2rem;
+}
+
+.close {
+  width: .8rem;
+  height: 1.2rem;
+  margin-top: .25rem;
+}

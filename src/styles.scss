@@ -1107,15 +1107,16 @@ tr.ia-row-background-active td {
 
 .ia-app-listing-btn-circle {
   float: right;
-  width: 30px;
+  width: 30px !important;
   height: 30px;
   padding: 5px 0;
   border-radius: 15px;
   text-decoration: none;
   border: none;
+  background: $ia-color-gray !important;
 
   &:hover, &:focus {
-    background-color: $ia-color-gray-lighter;
+    background-color: $ia-color-gray-lighter !important;
   }
 }
 
@@ -1994,9 +1995,9 @@ tr.ia-search-result-row.ia-state-highlight.ia-state-highlight {
 
 .p-calendar.p-calendar-w-btn .p-datepicker-trigger.p-button {
   width: 2.357em;
-  height: auto;
-  color: $ia-color-white;
-  background-color: $ia-color-white;
+  height: 2rem;
+  //color: $ia-color-white;
+  //background-color: $ia-color-white;
   border: 1px solid #ced4da;  // match bootstrap control
   border-bottom-right-radius: $border-radius;
   border-top-right-radius: $border-radius;
@@ -2796,4 +2797,12 @@ textarea {
 
 .h5 {
   font-size: .911rem;
+}
+
+.p-menuitem-icon {
+  font-size: .8rem;
+}
+
+.p-dropdown-items-wrapper {
+  max-height: 500px !important;
 }

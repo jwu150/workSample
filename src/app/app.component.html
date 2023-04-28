@@ -13,10 +13,37 @@
 <!--      ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.-->
 <!--    </p>-->
   </p-tabPanel>
-  <p-tabPanel header="Header III">
-    <p>
-      At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa
-      qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.
-    </p>
+  <p-tabPanel header="Column Filter">
+    <h6>
+      <p style="max-width: 800px;">
+        Column Filter icon is appended to each table header, when pressed it will show the corresponding filter with correct operators and controls.
+        Table columns with data type DateTime will have different controls than a text column.
+      </p>
+      <ul>
+        <li>Dialog cycles focus through keyboard</li>
+        <li>On Submit, will formulate a proper Spel expression to server for query.</li>
+        <li>Note: the operator icons are placeholders only.</li>
+      </ul>
+    </h6>
+    <p-selectButton
+      [options]="columns"
+      [(ngModel)]="value"
+      (onChange)="initFilter()"
+      [multiple]="false"
+      optionLabel="label"
+      optionValue="value">
+    </p-selectButton>
+    <div class="my-2">
+      <app-popup-filter
+        [events]="eventsSubject.asObservable()"
+        [column]="parentColumn"
+        [displayOnly]="true"
+        [colIndex]="0">
+      </app-popup-filter>
+    </div>
+<!--    <p>-->
+<!--      At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa-->
+<!--      qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.-->
+<!--    </p>-->
   </p-tabPanel>
 </p-tabView>
