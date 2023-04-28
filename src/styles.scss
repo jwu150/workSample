@@ -1113,7 +1113,8 @@ tr.ia-row-background-active td {
   border-radius: 15px;
   text-decoration: none;
   border: none;
-  background: $ia-color-gray !important;
+  color: $ia-color-gray;
+  background: transparent !important;
 
   &:hover, &:focus {
     background-color: $ia-color-gray-lighter !important;
@@ -1775,7 +1776,7 @@ li.p-disabled.p-multiselect-item > div.p-checkbox {
   border-right: 1px solid $ia-color-gray-dark;
 }
 
-.p-datatable .p-datatable-tbody > tr.p-highlight, .p-datatable .p-datatable-tbody >
+.p-datatable .p-datatable-tbody > tr.p-highlight, .p-datatable .p-datatable-tbody, >
 tr.ia-search-result-row.ia-state-highlight.ia-state-highlight {
   background-color: #cbd3d9;
   color: $ia-color-dark-charcoal;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Subject} from "rxjs";
 
 interface dataColumn {
@@ -15,6 +15,7 @@ interface dataColumn {
 })
 
 export class AppComponent implements OnInit {
+  @ViewChild('popupFilter', { static: true }) filterButton: ElementRef;
   title = 'Sample';
   value = 'TEXT';
   eventsSubject: Subject<any> = new Subject<any>();
@@ -39,6 +40,9 @@ export class AppComponent implements OnInit {
     const data = {
       column: this.parentColumn
     }
+    this.filterButton.nativeElement.style.backgroundColor = 'lightblue';
+    setTimeout(() =>
+      this.filterButton.nativeElement.style.backgroundColor = 'transparent', 1000);
     this.eventsSubject.next( { data });
   }
 }
