@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Subject} from "rxjs";
+import {asapScheduler, Subject} from "rxjs";
 
 interface dataColumn {
   label: string;
@@ -41,8 +41,7 @@ export class AppComponent implements OnInit {
       column: this.parentColumn
     }
     this.filterButton.nativeElement.style.backgroundColor = 'lightblue';
-    setTimeout(() =>
-      this.filterButton.nativeElement.style.backgroundColor = 'transparent', 1000);
+    asapScheduler.schedule(() => this.filterButton.nativeElement.style.backgroundColor = 'transparent', 1000);
     this.eventsSubject.next( { data });
   }
 }
