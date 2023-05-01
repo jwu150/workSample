@@ -9,7 +9,9 @@
   </p-tabPanel>
   <p-tabPanel header="Column Filter">
     <h4>Column Filters</h4>
-    <h6><b>First select a data type below, then click on the filter icon to see the pop-up filter</b></h6>
+    <h6>
+      <b>First select a data type below, then click on the filter icon to see the pop-up filter, select Between as the operator</b>
+    </h6>
     <p-selectButton
       [options]="columns"
       [(ngModel)]="value"
@@ -41,6 +43,6 @@
     <img class="frame" src="./assets/screens/column-filters.jpg" alt="column filters">
   </p-tabPanel>
   <p-tabPanel header="Feature Screen Shots">
-
+    <app-static-samples></app-static-samples>
   </p-tabPanel>
 </p-tabView>

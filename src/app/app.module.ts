@@ -16,13 +16,15 @@ import {FormsModule} from "@angular/forms";
 import {CalendarModule} from "primeng/calendar";
 import {SelectButtonModule} from "primeng/selectbutton";
 import { ResumeComponent } from './resume/resume.component';
+import { StaticSamplesComponent } from './static-samples/static-samples.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardViewComponent,
     PopupFilterComponent,
-    ResumeComponent
+    ResumeComponent,
+    StaticSamplesComponent
   ],
   imports: [
     BrowserModule,
