@@ -2806,3 +2806,11 @@ textarea {
 .p-dropdown-items-wrapper {
   max-height: 500px !important;
 }
+
+.frame {
+  height: auto;
+  border: 1px solid lightgray;
+  border-radius: .25rem;
+  margin: .5rem;
+  box-shadow: 0 10px 6px -6px #777;
+}
