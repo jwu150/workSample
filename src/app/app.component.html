@@ -1,48 +1,50 @@
 <h1 class="text-center top-banner">Jimmy Wu Angular Samples</h1>
-<p-tabView>
-  <p-tabPanel header="Resume">
-    <app-resume></app-resume>
-  </p-tabPanel>
-  <p-tabPanel header="Card Layout">
-    <h6 class="text-center"><b>Application Landing Page with Card Layout</b></h6>
-    <app-card-view></app-card-view>
-  </p-tabPanel>
-  <p-tabPanel header="Column Filter">
-    <h4>Column Filters</h4>
-    <h6>
-      <b>First select a data type below, then click on the filter icon to see the pop-up filter, select Between as the operator</b>
-    </h6>
-    <p-selectButton
-      [options]="columns"
-      [(ngModel)]="value"
-      (onChange)="initFilter()"
-      [multiple]="false"
-      optionLabel="label"
-      optionValue="value">
-    </p-selectButton>
-    <div class="my-2 button-container" #popupFilter>
-      <app-popup-filter
-        [events]="eventsSubject.asObservable()"
-        [column]="parentColumn"
-        [displayOnly]="true"
-        [colIndex]="0">
-      </app-popup-filter>
-    </div>
-    <h6 class="mt-5">
-      <p style="max-width: 800px;">
-        A column filter icon is attached to the table header when configured.  Upon activation of the filter it will show
-        the corresponding filter with correct operators and controls.  Users filled out the popups to construct the query.
-      </p>
-      <ul>
-        <li>Query combined filters with support for AND or OR operation</li>
-        <li>Validation is coded to all controls (e.g., To date must be later than From date)</li>
-        <li>Keyboard fully operational with focus cycle inside each popup</li>
-        <li>On Submit,the expression is built combining all filters and resultant query submitted to server via Spel Expression</li>
-      </ul>
-    </h6>
-    <img style="width:56rem;" class="frame" src="./assets/screens/column-filters.jpg" alt="column filters">
-  </p-tabPanel>
-  <p-tabPanel header="Feature Screen Shots">
-    <app-static-samples></app-static-samples>
-  </p-tabPanel>
-</p-tabView>
+<div class="content-area">
+  <p-tabView>
+    <p-tabPanel header="Resume">
+      <app-resume></app-resume>
+    </p-tabPanel>
+    <p-tabPanel header="Card Layout">
+      <h6 class="text-center"><b>Application Landing Page with Card Layout</b></h6>
+      <app-card-view></app-card-view>
+    </p-tabPanel>
+    <p-tabPanel header="Column Filter">
+      <h4>Column Filters</h4>
+      <h6>
+        <b>First select a data type below, then click on the filter icon to see the pop-up filter, select Between as the operator</b>
+      </h6>
+      <p-selectButton
+        [options]="columns"
+        [(ngModel)]="value"
+        (onChange)="initFilter()"
+        [multiple]="false"
+        optionLabel="label"
+        optionValue="value">
+      </p-selectButton>
+      <div class="my-2 button-container" #popupFilter>
+        <app-popup-filter
+          [events]="eventsSubject.asObservable()"
+          [column]="parentColumn"
+          [displayOnly]="true"
+          [colIndex]="0">
+        </app-popup-filter>
+      </div>
+      <h6 class="mt-5">
+        <p style="max-width: 800px;">
+          A column filter icon is attached to the table header when configured.  Upon activation of the filter it will show
+          the corresponding filter with correct operators and controls.  Users filled out the popups to construct the query.
+        </p>
+        <ul>
+          <li>Query combined filters with support for AND or OR operation</li>
+          <li>Validation is coded to all controls (e.g., To date must be later than From date)</li>
+          <li>Keyboard fully operational with focus cycle inside each popup</li>
+          <li>On Submit,the expression is built combining all filters and resultant query submitted to server via Spel Expression</li>
+        </ul>
+      </h6>
+      <img style="width:56rem;" class="frame" src="./assets/screens/column-filters.jpg" alt="column filters">
+    </p-tabPanel>
+    <p-tabPanel header="Feature Screen Shots">
+      <app-static-samples></app-static-samples>
+    </p-tabPanel>
+  </p-tabView>
+</div>
