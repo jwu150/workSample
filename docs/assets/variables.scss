@@ -1,0 +1,213 @@
+$ia-dark-background-color: #111b58;
+$ia-OT-navy: #111b58;
+$ia-dark-background-color-active: #2e3d98;
+$ia-dark-background-color-active-border-color: #2786c4;
+$ia-light-color: #fff;
+$ia-highlight-background-color: #dd6a2c;
+$ia-highlight-color: white;
+$ia-table-highlight-background-color: #e9f4fc;
+$ia-table-highlight-color: #515151;
+$ia-table-cell-height: 2.5rem;
+
+$ia-primary-navbar-height: 75px;
+$ia-primary-navbar-color: white;
+$ia-primary-navbar-active: $ia-dark-background-color-active;
+$ia-primary-navbar-active-border-color: $ia-light-color;
+$ia-viewport-min-width: 900px;
+$ia-viewport-padding-y: 28px;
+
+$ia-2nd-navbar-top: $ia-primary-navbar-height;
+$ia-2nd-navbar-height-1st: 35px;
+$ia-2nd-navbar-height-2nd-3rd: 75px;
+$ia-2nd-navbar-height-z-index: 1020;
+$ia-navbar-padding-x: 38px;
+
+$ia-2nd-navbar-background-color: #2e3d98;
+$ia-2nd-navbar-color: white;
+
+$ia-3rd-navbar-border-color: #F5F5F5;
+$ia-3rd-navbar-active-background-color: #2C95DD;
+
+$ia-footer-navbar-background-color: #f8f8f8;
+$ia-footer-navbar-border-color: #e7e7e7;
+
+$ia-color-gray: #c2c2c2;
+$ia-color-gray-lighter: #e1e1e1;
+$ia-color-gray-lightest: #f2f2f2;
+$ia-color-gray-dark: #a9a9a9;
+$ia-color-gray-darker: #959595;
+$ia-color-gray-darkest: #252525;
+$ia-color-dark-charcoal: #333333;
+$ia-color-black: #000000;
+$ia-color-white: #ffffff;
+$ia-color-gallery: #eeeeee;
+$ia-color-silver: #cccccc;
+$ia-color-dove-gray: #636363;
+$ia-color-matisse: #1a6ba2;
+$ia-text-muted: #555555;
+
+$ia-text-highlight-color: yellow;
+
+$ia-listing-background-color: #f5f5f5;
+$ia-listing-card-body-height: 40px;
+
+$ia-datepicker-hover-color: #eaeaea;
+$ia-multiselect-chkbox-border-color: #a6a6a6;
+
+$ia-color-action-button: #b2bec5;
+$ia-color-action-button-foreground: $ia-color-dark-charcoal;
+$ia-color-action-link: #2740b0;
+
+$gray-base:              #000;
+
+@mixin ia-background-gradient {
+  background-color: #111b58;
+  background: -webkit-linear-gradient(29deg, rgb(9, 14, 44) 0%, rgb(18, 44, 105) 59%, rgb(7, 141, 179) 100%);
+  background: -o-linear-gradient(29deg, rgb(9, 14, 44) 0%, rgb(18, 44, 105) 59%, rgb(7, 141, 179) 100%);
+  background: -ms-linear-gradient(29deg, rgb(9, 14, 44) 0%, rgb(18, 44, 105) 59%, rgb(7, 141, 179) 100%);
+  background: -moz-linear-gradient(29deg, rgb(9, 14, 44) 0%, rgb(18, 44, 105) 59%, rgb(7, 141, 179) 100%);
+  background: linear-gradient(61deg, rgb(9, 14, 44) 0%, rgb(18, 44, 105) 59%, rgb(7, 141, 179) 100%);
+  background-attachment: fixed;
+}
+/* Typography
+/*
+/* Font, line-height, and color for body text, headings, and more.
+/*
+ */
+
+$font-family-sans-serif: "OpenText Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$font-size-large:         1.125rem;
+$font-size-small:         .75rem;
+$font-size-h1:            1.82rem;
+$font-size-h2:            1.37rem;
+$font-size-h3:            1.25rem;
+$font-size-h4:            1.02rem;
+$font-size-h5:            .911rem;
+$font-size-h6:            .8rem;
+$font-size-h7:            .5rem;
+
+$h4-font-size: 30px !default;
+
+$footer-height:           0px;
+
+$ia-secondary-nav-section-height: 35px;
+$ia-fixed-sections-height: $ia-primary-navbar-height + $ia-2nd-navbar-height-1st + $ia-2nd-navbar-height-2nd-3rd + $footer-height;
+
+$brand-primary:         #2C95DD;
+$brand-dark:            #1d6391;
+$brand-light:           #80bfeb;
+$brand-lighter:         #bfdff5;
+$brand-lightest:        #e9f4fc;
+
+/* Global color for active items (e.g., navs or dropdowns) */
+$component-active-color:    #fff;
+
+/* Horizontal line color */
+$hr-border:                   #d7d7d7;
+
+$pagination-disabled-color:   #C2C2C2;
+
+/* wizard modal styles */
+$ia-wizard-modal-dialog-width:   70%;
+$ia-wizard-modal-dialog-height:  550px;
+$ia-wizard-modal-border: 1rem solid $ia-color-gray-lightest;
+
+$ia-wizard-modal-tab-content-height:  500px;
+
+$ia-search-result-query-background-color: rgba(215,215,215,.25);
+
+$unavailable-content:         #e69021;
+$ia-result-list-icon:         #959595;
+
+$ia-dashboard-color-black: #252525;
+$ia-dashboard-color-gray: #252525;
+$ia-dashboard-color-link: #bfdff5;
+$ia-dashboard-color-card: #232e72;
+$ia-dashboard-color-white: #e9f4fc;
+$ia-dashboard-max-width: 1920px !important;
+
+$ia-focus-ring-color: #9accef;
+
+$primary: $ia-OT-navy !default;
+
+%ia-table-toolbar {
+  .btn.btn-link {
+    margin: .1rem;
+    color: $ia-color-dark-charcoal;
+    &:hover, &:focus {
+      color: #5c707d;
+      background-color: #eef2f4;
+      outline: none;
+      border-color: transparent;
+      i {
+        color: #5c707d;
+      }
+    }
+    &:hover {
+      box-shadow: none;
+    }
+    &:active {
+      color: #666666;
+      background-color: #eeeeee;
+      i {
+        color: #666666;
+      }
+    }
+    &:disabled {
+      color: #999999;
+      background-color: #dce4e8;
+      i {
+        color: #999999;
+      }
+    }
+  }
+}
+
+%ia-table-heading-attr {
+  height: 3rem;
+  line-height: 3rem;
+  border-bottom: 1px solid #ddd;
+}
+
+%ia-text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+%ia-sticky-header {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+  background-color: white;
+}
+
+%ia-table-toolbar-button {
+  pointer-events: auto;
+  background-color: #b2bec5;
+  color: $ia-color-dark-charcoal;
+  border-color: transparent;
+  border-radius: 17px;
+  height: 2rem;
+  line-height: 1em;
+  margin: 0 .25rem !important;
+}
+
+%ia-table-toolbar-button-hover {
+  color: #5c707d;
+  background-color: #eef2f4;
+  outline: none;
+  box-shadow: none;
+}
+
+%ia-table-toolbar-button-focus {
+  color: #5c707d;
+  background-color: #eef2f4;
+  outline: none;
+}
+
+%ia-table-toolbar-button-active {
+  color: #666666;
+  background-color: #eeeeee;
+}
